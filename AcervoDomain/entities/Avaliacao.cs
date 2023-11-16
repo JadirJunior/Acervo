@@ -9,7 +9,7 @@ namespace AcervoDomain.entities
 {
     public class Avaliacao : BaseEntity<int>
     {
-
+            
         public String? comentario;
         public int? estrelas;
         public Livro? livro;
