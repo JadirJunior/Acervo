@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Service.validators
-{
+{ 
     public class UsuarioValidator : AbstractValidator<Usuario>
     {
 
