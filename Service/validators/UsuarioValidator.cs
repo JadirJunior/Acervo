@@ -11,7 +11,7 @@ namespace Service.validators
     public class UsuarioValidator : AbstractValidator<Usuario>
     {
 
-        public UsuarioValidator()
+        public UsuarioValidator() 
         {
             RuleFor(c => c.Nome)
                 .NotEmpty().WithMessage("Por favor informe seu nome")
