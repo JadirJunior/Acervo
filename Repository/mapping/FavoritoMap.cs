@@ -15,7 +15,7 @@ namespace Repository.mapping
         {
             builder.ToTable("Favorito");
 
-            builder.HasKey(prop => prop.id);
+            builder.HasKey(prop => prop.Id);
 
             builder.HasOne(prop => prop.livro);
 

@@ -11,7 +11,7 @@ using Repository.mapping;
 
 namespace Repository.context
 {
-    internal class MySqlContext : DbContext
+    public class MySqlContext : DbContext
     {
 
         public MySqlContext(DbContextOptions<MySqlContext> options) : base(options)

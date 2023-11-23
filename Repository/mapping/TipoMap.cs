@@ -15,7 +15,7 @@ namespace Repository.mapping
         {
             builder.ToTable("Tipo");
 
-            builder.HasKey(prop => prop.id);
+            builder.HasKey(prop => prop.Id);
 
             builder.Property(prop => prop.tipo)
                 .IsRequired()

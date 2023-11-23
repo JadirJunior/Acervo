@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Base
+namespace AcervoApp.models
 {
-    public interface IBaseEntity
+    internal class LivroModel
     {
     }
 }

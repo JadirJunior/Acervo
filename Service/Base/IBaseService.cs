@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using AcervoDomain.Base;
+using FluentValidation;
 using Repository.Base;
 
 namespace Service.Base

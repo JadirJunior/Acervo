@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AcervoDomain.Base;
+using AutoMapper;
 using FluentValidation;
 using Repository.Base;
 using Service.Base;

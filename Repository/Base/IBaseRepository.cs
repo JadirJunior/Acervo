@@ -9,7 +9,7 @@ namespace Repository.Base
 {
     public interface IBaseRepository<TEntity> where TEntity : IBaseEntity
 {
-    void ClearChangeTracker();
+    void ClearChangeTracker();  
     void AttachObject(object obj);
     void Insert(TEntity obj);
 
