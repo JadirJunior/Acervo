@@ -6,7 +6,23 @@ using System.Threading.Tasks;
 
 namespace AcervoApp.models
 {
-    internal class LivroModel
+    public class LivroModel
     {
+
+        public int Id { get; set; }
+
+        public String Titulo { get; set; }
+
+        public String Sinopse { get; set; }
+
+        public byte[] Thumbnail { get; set; }
+
+        public byte[] Documento { get; set; }
+
+        public UsuarioModel Autor { get; set; }
+
+
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using AcervoApp.view;
+﻿using AcervoApp.models;
+using AcervoApp.view;
 using AcervoDomain.entities;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -72,13 +73,13 @@ namespace AcervoApp.infra
             Services.AddTransient<CadastroVenda, CadastroVenda>();*/
 
             // Mapping
-            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Tipo, Tipo>(); }).CreateMapper());
-            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Usuario, Usuario>(); }).CreateMapper());
-            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Avaliacao, Avaliacao>(); }).CreateMapper());
-            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Favorito, Favorito>(); }).CreateMapper());
-            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Genero, Genero>(); }).CreateMapper());
-            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<GeneroTipo, GeneroTipo>(); }).CreateMapper());
-            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Livro, Livro>(); }).CreateMapper());
+            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Tipo, TipoModel>(); }).CreateMapper());
+            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Usuario, UsuarioModel>(); }).CreateMapper());
+            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Avaliacao, AvaliacaoModel>(); }).CreateMapper());
+            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Favorito, FavoritoModel>(); }).CreateMapper());
+            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Genero, GeneroModel>(); }).CreateMapper());
+            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<GeneroTipo, GeneroTipoModel>(); }).CreateMapper());
+            Services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Livro, LivroModel>(); }).CreateMapper());
 
             ServicesProvider = Services.BuildServiceProvider();
         }

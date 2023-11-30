@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace AcervoApp.models
 {
-    internal class GeneroModel
+    public class GeneroModel
     {
+
+        public int Id { get; set; }
+
+        public String Tipo { get; set; }
+
+        public String Descricao { get; set; }
+
+
+
     }
 }

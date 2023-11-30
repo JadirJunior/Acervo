@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace AcervoApp.models
 {
-    internal class TipoModel
+    public class TipoModel
     {
+
+        public int Id { get; set; }
+
+        public int Tipo { get; set; }
+
+
     }
 }

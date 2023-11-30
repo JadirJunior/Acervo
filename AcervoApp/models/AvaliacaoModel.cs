@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace AcervoApp.models
 {
-    internal class AvaliacaoModel
+    public class AvaliacaoModel
     {
+
+        public int Id { get; set; }
+        public String? Comentario { get; set; }
+        public int Estrelas { get; set; }   
+
+        public LivroModel? Livro { get; set; }
+
     }
 }

@@ -145,11 +145,11 @@
             // 
             this.lblAcervo.AutoSize = true;
             this.lblAcervo.BackColor = System.Drawing.Color.Transparent;
-            this.lblAcervo.Font = new System.Drawing.Font("Snap ITC", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblAcervo.Font = new System.Drawing.Font("Century Gothic", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblAcervo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.lblAcervo.Location = new System.Drawing.Point(107, 83);
+            this.lblAcervo.Location = new System.Drawing.Point(122, 90);
             this.lblAcervo.Name = "lblAcervo";
-            this.lblAcervo.Size = new System.Drawing.Size(150, 43);
+            this.lblAcervo.Size = new System.Drawing.Size(133, 40);
             this.lblAcervo.TabIndex = 7;
             this.lblAcervo.Text = "Acervo";
             this.lblAcervo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

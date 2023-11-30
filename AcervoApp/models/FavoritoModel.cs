@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace AcervoApp.models
 {
-    internal class FavoritoModel
+    public class FavoritoModel
     {
+
+        public int Id { get; set; }
+        public UsuarioModel Usuario { get; set; }
+        public LivroModel Livro { get; set; }
+
     }
 }
