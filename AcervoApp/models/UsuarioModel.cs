@@ -21,5 +21,6 @@ namespace AcervoApp.models
         public TipoModel Tipo { get; set; }
 
         public String Bio { get; set; }
+
     }
 }

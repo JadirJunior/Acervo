@@ -14,10 +14,12 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageReference Include="ReaLTaiizor" Version="3.7.9.7" />
+    <PackageReference Include="Spire.PDF" Version="9.11.4" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="assets\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>

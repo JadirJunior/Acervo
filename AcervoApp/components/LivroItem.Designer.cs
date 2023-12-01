@@ -28,63 +28,104 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.imagemUser = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.imagemUser)).BeginInit();
-            this.SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LivroItem));
+            lblTitulo = new Label();
+            imagemUser = new PictureBox();
+            txtSinopse = new ReaLTaiizor.Controls.MaterialRichTextBox();
+            listGeneros = new ListView();
+            pcbFavorito = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)imagemUser).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pcbFavorito).BeginInit();
+            SuspendLayout();
             // 
-            // label1
+            // lblTitulo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(256, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 36);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Título";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(61, 79);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Sinopse";
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Century Gothic", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTitulo.Location = new Point(137, 4);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(108, 44);
+            lblTitulo.TabIndex = 2;
+            lblTitulo.Text = "Título";
             // 
             // imagemUser
             // 
-            this.imagemUser.Image = global::AcervoApp.Properties.Resources.UserIcon;
-            this.imagemUser.Location = new System.Drawing.Point(437, 11);
-            this.imagemUser.Name = "imagemUser";
-            this.imagemUser.Size = new System.Drawing.Size(65, 63);
-            this.imagemUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imagemUser.TabIndex = 6;
-            this.imagemUser.TabStop = false;
-            this.imagemUser.Click += new System.EventHandler(this.imagemUser_Click);
+            imagemUser.Image = Properties.Resources.UserIcon;
+            imagemUser.Location = new Point(463, 4);
+            imagemUser.Margin = new Padding(3, 4, 3, 4);
+            imagemUser.Name = "imagemUser";
+            imagemUser.Size = new Size(87, 55);
+            imagemUser.SizeMode = PictureBoxSizeMode.Zoom;
+            imagemUser.TabIndex = 6;
+            imagemUser.TabStop = false;
+            imagemUser.Click += imagemUser_Click;
+            imagemUser.MouseLeave += imagemUser_MouseLeave;
+            imagemUser.MouseHover += imagemUser_MouseHover;
+            // 
+            // txtSinopse
+            // 
+            txtSinopse.BackColor = Color.FromArgb(255, 255, 255);
+            txtSinopse.BorderStyle = BorderStyle.FixedSingle;
+            txtSinopse.Depth = 0;
+            txtSinopse.Enabled = false;
+            txtSinopse.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            txtSinopse.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            txtSinopse.Hint = "";
+            txtSinopse.Location = new Point(3, 73);
+            txtSinopse.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            txtSinopse.Name = "txtSinopse";
+            txtSinopse.Size = new Size(383, 108);
+            txtSinopse.TabIndex = 7;
+            txtSinopse.Text = "";
+            // 
+            // listGeneros
+            // 
+            listGeneros.Location = new Point(428, 73);
+            listGeneros.Name = "listGeneros";
+            listGeneros.Size = new Size(164, 108);
+            listGeneros.TabIndex = 13;
+            listGeneros.UseCompatibleStateImageBehavior = false;
+            listGeneros.View = View.List;
+            // 
+            // pcbFavorito
+            // 
+            pcbFavorito.Image = (Image)resources.GetObject("pcbFavorito.Image");
+            pcbFavorito.Location = new Point(18, 188);
+            pcbFavorito.Margin = new Padding(3, 4, 3, 4);
+            pcbFavorito.Name = "pcbFavorito";
+            pcbFavorito.Size = new Size(47, 44);
+            pcbFavorito.SizeMode = PictureBoxSizeMode.Zoom;
+            pcbFavorito.TabIndex = 14;
+            pcbFavorito.TabStop = false;
+            pcbFavorito.Click += pcbFavorito_Click;
             // 
             // LivroItem
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.imagemUser);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Name = "LivroItem";
-            this.Size = new System.Drawing.Size(604, 200);
-            this.Load += new System.EventHandler(this.LivroItem_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.imagemUser)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            BorderStyle = BorderStyle.FixedSingle;
+            Controls.Add(pcbFavorito);
+            Controls.Add(listGeneros);
+            Controls.Add(txtSinopse);
+            Controls.Add(imagemUser);
+            Controls.Add(lblTitulo);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "LivroItem";
+            Size = new Size(608, 236);
+            Load += LivroItem_Load;
+            Click += LivroItem_Click;
+            ((System.ComponentModel.ISupportInitialize)imagemUser).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pcbFavorito).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-        private Label label1;
-        private Label label2;
+        private Label lblTitulo;
         private PictureBox imagemUser;
+        private ReaLTaiizor.Controls.MaterialRichTextBox txtSinopse;
+        private ListView listGeneros;
+        private PictureBox pcbFavorito;
     }
 }

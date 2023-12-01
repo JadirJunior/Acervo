@@ -11,15 +11,17 @@ namespace AcervoApp.models
 
         public int Id { get; set; }
 
-        public String Titulo { get; set; }
+        public String? Titulo { get; set; }
 
-        public String Sinopse { get; set; }
+        public String? Sinopse { get; set; }
 
-        public byte[] Thumbnail { get; set; }
+        public byte[]? Thumbnail { get; set; }
 
-        public byte[] Documento { get; set; }
+        public byte[]? Documento { get; set; }
 
-        public UsuarioModel Autor { get; set; }
+        public UsuarioModel? Autor { get; set; }
+
+        public List<GeneroModel>? Generos { get; set; }
 
 
 

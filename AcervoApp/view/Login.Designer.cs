@@ -28,162 +28,167 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtUser = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
-            this.txtSenha = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
-            this.btnEntrar = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnSemLogin = new ReaLTaiizor.Controls.MaterialButton();
-            this.lblAcervo = new ReaLTaiizor.Controls.BigLabel();
-            this.lblCadastro = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            txtUser = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
+            txtSenha = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
+            btnEntrar = new ReaLTaiizor.Controls.MaterialButton();
+            lblAcervo = new ReaLTaiizor.Controls.BigLabel();
+            lblCadastro = new Label();
+            btnEntrar2 = new ReaLTaiizor.Controls.MaterialButton();
+            SuspendLayout();
             // 
             // txtUser
             // 
-            this.txtUser.AnimateReadOnly = false;
-            this.txtUser.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtUser.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtUser.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtUser.Depth = 0;
-            this.txtUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtUser.HideSelection = true;
-            this.txtUser.Hint = "User";
-            this.txtUser.LeadingIcon = null;
-            this.txtUser.Location = new System.Drawing.Point(6, 151);
-            this.txtUser.MaxLength = 32767;
-            this.txtUser.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
-            this.txtUser.Name = "txtUser";
-            this.txtUser.PasswordChar = '\0';
-            this.txtUser.PrefixSuffixText = null;
-            this.txtUser.ReadOnly = false;
-            this.txtUser.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtUser.SelectedText = "";
-            this.txtUser.SelectionLength = 0;
-            this.txtUser.SelectionStart = 0;
-            this.txtUser.ShortcutsEnabled = true;
-            this.txtUser.Size = new System.Drawing.Size(359, 48);
-            this.txtUser.TabIndex = 2;
-            this.txtUser.TabStop = false;
-            this.txtUser.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtUser.TrailingIcon = null;
-            this.txtUser.UseSystemPasswordChar = false;
+            txtUser.AnimateReadOnly = false;
+            txtUser.AutoCompleteMode = AutoCompleteMode.None;
+            txtUser.AutoCompleteSource = AutoCompleteSource.None;
+            txtUser.BackgroundImageLayout = ImageLayout.None;
+            txtUser.CharacterCasing = CharacterCasing.Normal;
+            txtUser.Depth = 0;
+            txtUser.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            txtUser.HideSelection = true;
+            txtUser.Hint = "User";
+            txtUser.LeadingIcon = null;
+            txtUser.Location = new Point(7, 201);
+            txtUser.Margin = new Padding(3, 4, 3, 4);
+            txtUser.MaxLength = 32767;
+            txtUser.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
+            txtUser.Name = "txtUser";
+            txtUser.PasswordChar = '\0';
+            txtUser.PrefixSuffixText = null;
+            txtUser.ReadOnly = false;
+            txtUser.RightToLeft = RightToLeft.No;
+            txtUser.SelectedText = "";
+            txtUser.SelectionLength = 0;
+            txtUser.SelectionStart = 0;
+            txtUser.ShortcutsEnabled = true;
+            txtUser.Size = new Size(410, 48);
+            txtUser.TabIndex = 2;
+            txtUser.TabStop = false;
+            txtUser.TextAlign = HorizontalAlignment.Left;
+            txtUser.TrailingIcon = null;
+            txtUser.UseSystemPasswordChar = false;
             // 
             // txtSenha
             // 
-            this.txtSenha.AnimateReadOnly = false;
-            this.txtSenha.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtSenha.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtSenha.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtSenha.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtSenha.Depth = 0;
-            this.txtSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtSenha.HideSelection = true;
-            this.txtSenha.Hint = "Senha";
-            this.txtSenha.LeadingIcon = null;
-            this.txtSenha.Location = new System.Drawing.Point(6, 226);
-            this.txtSenha.MaxLength = 32767;
-            this.txtSenha.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
-            this.txtSenha.Name = "txtSenha";
-            this.txtSenha.PasswordChar = '*';
-            this.txtSenha.PrefixSuffixText = null;
-            this.txtSenha.ReadOnly = false;
-            this.txtSenha.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtSenha.SelectedText = "";
-            this.txtSenha.SelectionLength = 0;
-            this.txtSenha.SelectionStart = 0;
-            this.txtSenha.ShortcutsEnabled = true;
-            this.txtSenha.Size = new System.Drawing.Size(359, 48);
-            this.txtSenha.TabIndex = 3;
-            this.txtSenha.TabStop = false;
-            this.txtSenha.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtSenha.TrailingIcon = null;
-            this.txtSenha.UseSystemPasswordChar = false;
+            txtSenha.AnimateReadOnly = false;
+            txtSenha.AutoCompleteMode = AutoCompleteMode.None;
+            txtSenha.AutoCompleteSource = AutoCompleteSource.None;
+            txtSenha.BackgroundImageLayout = ImageLayout.None;
+            txtSenha.CharacterCasing = CharacterCasing.Normal;
+            txtSenha.Depth = 0;
+            txtSenha.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            txtSenha.HideSelection = true;
+            txtSenha.Hint = "Senha";
+            txtSenha.LeadingIcon = null;
+            txtSenha.Location = new Point(7, 301);
+            txtSenha.Margin = new Padding(3, 4, 3, 4);
+            txtSenha.MaxLength = 32767;
+            txtSenha.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
+            txtSenha.Name = "txtSenha";
+            txtSenha.PasswordChar = '*';
+            txtSenha.PrefixSuffixText = null;
+            txtSenha.ReadOnly = false;
+            txtSenha.RightToLeft = RightToLeft.No;
+            txtSenha.SelectedText = "";
+            txtSenha.SelectionLength = 0;
+            txtSenha.SelectionStart = 0;
+            txtSenha.ShortcutsEnabled = true;
+            txtSenha.Size = new Size(410, 48);
+            txtSenha.TabIndex = 3;
+            txtSenha.TabStop = false;
+            txtSenha.TextAlign = HorizontalAlignment.Left;
+            txtSenha.TrailingIcon = null;
+            txtSenha.UseSystemPasswordChar = false;
             // 
             // btnEntrar
             // 
-            this.btnEntrar.AutoSize = false;
-            this.btnEntrar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnEntrar.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnEntrar.Depth = 0;
-            this.btnEntrar.HighEmphasis = true;
-            this.btnEntrar.Icon = null;
-            this.btnEntrar.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnEntrar.Location = new System.Drawing.Point(25, 309);
-            this.btnEntrar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnEntrar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnEntrar.Name = "btnEntrar";
-            this.btnEntrar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnEntrar.Size = new System.Drawing.Size(158, 36);
-            this.btnEntrar.TabIndex = 4;
-            this.btnEntrar.Text = "Entrar";
-            this.btnEntrar.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnEntrar.UseAccentColor = false;
-            this.btnEntrar.UseVisualStyleBackColor = true;
-            this.btnEntrar.Click += new System.EventHandler(this.btnEntrar_Click);
-            // 
-            // btnSemLogin
-            // 
-            this.btnSemLogin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSemLogin.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnSemLogin.Depth = 0;
-            this.btnSemLogin.HighEmphasis = true;
-            this.btnSemLogin.Icon = null;
-            this.btnSemLogin.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnSemLogin.Location = new System.Drawing.Point(188, 309);
-            this.btnSemLogin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnSemLogin.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnSemLogin.Name = "btnSemLogin";
-            this.btnSemLogin.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnSemLogin.Size = new System.Drawing.Size(158, 36);
-            this.btnSemLogin.TabIndex = 5;
-            this.btnSemLogin.Text = "Entrar sem login";
-            this.btnSemLogin.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnSemLogin.UseAccentColor = false;
-            this.btnSemLogin.UseVisualStyleBackColor = true;
-            this.btnSemLogin.Click += new System.EventHandler(this.btnSemLogin_Click);
+            btnEntrar.AutoSize = false;
+            btnEntrar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnEntrar.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnEntrar.Depth = 0;
+            btnEntrar.HighEmphasis = true;
+            btnEntrar.Icon = null;
+            btnEntrar.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            btnEntrar.Location = new Point(29, 412);
+            btnEntrar.Margin = new Padding(5, 8, 5, 8);
+            btnEntrar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            btnEntrar.Name = "btnEntrar";
+            btnEntrar.NoAccentTextColor = Color.Empty;
+            btnEntrar.Size = new Size(181, 48);
+            btnEntrar.TabIndex = 4;
+            btnEntrar.Text = "Entrar";
+            btnEntrar.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnEntrar.UseAccentColor = false;
+            btnEntrar.UseVisualStyleBackColor = true;
+            btnEntrar.Click += btnEntrar_Click;
             // 
             // lblAcervo
             // 
-            this.lblAcervo.AutoSize = true;
-            this.lblAcervo.BackColor = System.Drawing.Color.Transparent;
-            this.lblAcervo.Font = new System.Drawing.Font("Century Gothic", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblAcervo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.lblAcervo.Location = new System.Drawing.Point(122, 90);
-            this.lblAcervo.Name = "lblAcervo";
-            this.lblAcervo.Size = new System.Drawing.Size(133, 40);
-            this.lblAcervo.TabIndex = 7;
-            this.lblAcervo.Text = "Acervo";
-            this.lblAcervo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lblAcervo.AutoSize = true;
+            lblAcervo.BackColor = Color.Transparent;
+            lblAcervo.Font = new Font("Century Gothic", 24.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblAcervo.ForeColor = Color.FromArgb(80, 80, 80);
+            lblAcervo.Location = new Point(127, 112);
+            lblAcervo.Name = "lblAcervo";
+            lblAcervo.Size = new Size(170, 51);
+            lblAcervo.TabIndex = 7;
+            lblAcervo.Text = "Acervo";
+            lblAcervo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblCadastro
             // 
-            this.lblCadastro.AutoSize = true;
-            this.lblCadastro.Font = new System.Drawing.Font("Century Schoolbook", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblCadastro.ForeColor = System.Drawing.Color.Black;
-            this.lblCadastro.Location = new System.Drawing.Point(79, 351);
-            this.lblCadastro.Name = "lblCadastro";
-            this.lblCadastro.Size = new System.Drawing.Size(228, 20);
-            this.lblCadastro.TabIndex = 8;
-            this.lblCadastro.Text = "Não possui login? Cadastre-se";
-            this.lblCadastro.Click += new System.EventHandler(this.lblCadastro_Click);
-            this.lblCadastro.MouseLeave += new System.EventHandler(this.lblCadastro_MouseLeave);
-            this.lblCadastro.MouseHover += new System.EventHandler(this.lblCadastro_MouseHover);
+            lblCadastro.AutoSize = true;
+            lblCadastro.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblCadastro.ForeColor = Color.Black;
+            lblCadastro.Location = new Point(75, 468);
+            lblCadastro.Name = "lblCadastro";
+            lblCadastro.Size = new Size(285, 23);
+            lblCadastro.TabIndex = 8;
+            lblCadastro.Text = "Não possui login? Cadastre-se";
+            lblCadastro.Click += lblCadastro_Click;
+            lblCadastro.MouseLeave += lblCadastro_MouseLeave;
+            lblCadastro.MouseHover += lblCadastro_MouseHover;
+            // 
+            // btnEntrar2
+            // 
+            btnEntrar2.AutoSize = false;
+            btnEntrar2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnEntrar2.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnEntrar2.Depth = 0;
+            btnEntrar2.HighEmphasis = true;
+            btnEntrar2.Icon = null;
+            btnEntrar2.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            btnEntrar2.Location = new Point(220, 412);
+            btnEntrar2.Margin = new Padding(5, 8, 5, 8);
+            btnEntrar2.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            btnEntrar2.Name = "btnEntrar2";
+            btnEntrar2.NoAccentTextColor = Color.Empty;
+            btnEntrar2.Size = new Size(181, 48);
+            btnEntrar2.TabIndex = 9;
+            btnEntrar2.Text = "Entrar sem login";
+            btnEntrar2.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnEntrar2.UseAccentColor = false;
+            btnEntrar2.UseVisualStyleBackColor = true;
+            btnEntrar2.Click += btnEntrar2_Click;
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 422);
-            this.Controls.Add(this.lblCadastro);
-            this.Controls.Add(this.lblAcervo);
-            this.Controls.Add(this.btnSemLogin);
-            this.Controls.Add(this.btnEntrar);
-            this.Controls.Add(this.txtSenha);
-            this.Controls.Add(this.txtUser);
-            this.Name = "Login";
-            this.Text = "Login";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(424, 563);
+            Controls.Add(btnEntrar2);
+            Controls.Add(lblCadastro);
+            Controls.Add(lblAcervo);
+            Controls.Add(btnEntrar);
+            Controls.Add(txtSenha);
+            Controls.Add(txtUser);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "Login";
+            Padding = new Padding(3, 85, 3, 4);
+            Text = "Login";
+            FormClosing += Login_FormClosing;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -191,8 +196,8 @@
         private ReaLTaiizor.Controls.MaterialTextBoxEdit txtUser;
         private ReaLTaiizor.Controls.MaterialTextBoxEdit txtSenha;
         private ReaLTaiizor.Controls.MaterialButton btnEntrar;
-        private ReaLTaiizor.Controls.MaterialButton btnSemLogin;
         private ReaLTaiizor.Controls.BigLabel lblAcervo;
         private Label lblCadastro;
+        private ReaLTaiizor.Controls.MaterialButton btnEntrar2;
     }
 }
