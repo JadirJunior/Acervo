@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Service.validators
 {
-    public class GeneroTipoValidator : AbstractValidator<GeneroTipo>
+    public class GeneroLivroValidator : AbstractValidator<GeneroLivro>
     {
 
-        public GeneroTipoValidator()
+        public GeneroLivroValidator()
         {
-            RuleFor(c => c.livro)
-                .NotEmpty().WithMessage("Por favor informe qual livro está favoritando.")
-                .NotNull().WithMessage("Por favor informe qual livro está favoritando.");
-
-            RuleFor(c => c.genero)
+            RuleFor(c => c.Genero)
                 .NotEmpty().WithMessage("Por favor informe o gênero.")
                 .NotNull().WithMessage("Por favor informe o gênero.");
+
+            RuleFor(c => c.Livro)
+                .NotEmpty().WithMessage("Por favor informe o livro.")
+                .NotNull().WithMessage("Por favor informe o livro.");
         }
 
     }

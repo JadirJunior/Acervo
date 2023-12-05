@@ -52,6 +52,7 @@
             tabFavoritos = new TabPage();
             label4 = new Label();
             panelFav = new FlowLayoutPanel();
+            tabLoggout = new TabPage();
             opfUser = new OpenFileDialog();
             pages.SuspendLayout();
             tabHome.SuspendLayout();
@@ -89,12 +90,14 @@
             icones.Images.SetKeyName(0, "homeIcon.png");
             icones.Images.SetKeyName(1, "UserIcon.png");
             icones.Images.SetKeyName(2, "starIcon.png");
+            icones.Images.SetKeyName(3, "logout.png");
             // 
             // pages
             // 
             pages.Controls.Add(tabHome);
             pages.Controls.Add(tabUser);
             pages.Controls.Add(tabFavoritos);
+            pages.Controls.Add(tabLoggout);
             pages.Depth = 0;
             pages.Dock = DockStyle.Fill;
             pages.ImageList = icones;
@@ -438,6 +441,18 @@
             panelFav.Size = new Size(1035, 571);
             panelFav.TabIndex = 1;
             // 
+            // tabLoggout
+            // 
+            tabLoggout.ImageKey = "logout.png";
+            tabLoggout.Location = new Point(4, 29);
+            tabLoggout.Name = "tabLoggout";
+            tabLoggout.Size = new Size(1035, 659);
+            tabLoggout.TabIndex = 3;
+            tabLoggout.Text = "Loggout";
+            tabLoggout.UseVisualStyleBackColor = true;
+            tabLoggout.Click += tabLoggout_Click;
+            tabLoggout.Enter += tabLoggout_Enter;
+            // 
             // opfUser
             // 
             opfUser.FileName = "openFileDialog1";
@@ -457,6 +472,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Principal";
             WindowState = FormWindowState.Maximized;
+            FormClosing += Principal_FormClosing;
             pages.ResumeLayout(false);
             tabHome.ResumeLayout(false);
             tabUser.ResumeLayout(false);
@@ -491,5 +507,6 @@
         private ReaLTaiizor.Controls.MaterialCheckBox cmbMostraSenha;
         private MaterialSkin.Controls.MaterialButton btnNovoLivro;
         private OpenFileDialog opfUser;
+        private TabPage tabLoggout;
     }
 }

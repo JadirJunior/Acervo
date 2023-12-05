@@ -9,14 +9,19 @@ namespace AcervoApp.utils
     public class Utils
     {
 
-        public static void messageBoxOk(String texto, String titulo)
+        public static DialogResult messageBoxOk(String texto, String titulo)
         {
-            MessageBox.Show(texto, titulo, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return MessageBox.Show(texto, titulo, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        public static void messageExclamation(String texto, String titulo)
+        public static DialogResult messageExclamation(String texto, String titulo)
         {
-            MessageBox.Show(texto, titulo, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            return MessageBox.Show(texto, titulo, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        public static DialogResult messageQuestion(String texto, String titulo)
+        {
+            return MessageBox.Show(texto, titulo, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
     }

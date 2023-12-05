@@ -235,6 +235,7 @@
             lstGeneros.TabIndex = 12;
             lstGeneros.UseCompatibleStateImageBehavior = false;
             lstGeneros.View = View.List;
+            lstGeneros.MouseDoubleClick += lstGeneros_MouseDoubleClick;
             // 
             // FormNovoLivro
             // 

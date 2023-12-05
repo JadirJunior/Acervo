@@ -24,8 +24,7 @@ namespace Repository.context
         public DbSet<Livro>? Livro { get; set; }
         public DbSet<Favorito>? Favorito { get; set; }
         public DbSet<Genero>? Genero { get; set; }
-        public DbSet<GeneroTipo>? GeneroTipo { get; set; }
-        public DbSet<Tipo>? Tipo { get; set; }
+        public DbSet<GeneroLivro>? GeneroLivro { get; set; }
         public DbSet<Avaliacao>? Avaliacao { get; set; }
 
 
@@ -37,8 +36,7 @@ namespace Repository.context
             modelBuilder.Entity<Favorito>(new FavoritoMap().Configure);
             modelBuilder.Entity<Genero>(new GeneroMap().Configure);
             modelBuilder.Entity<Livro>(new LivroMap().Configure);
-            modelBuilder.Entity<Tipo>(new TipoMap().Configure);
-            modelBuilder.Entity<GeneroTipo>(new GeneroTipoMap().Configure);
+            modelBuilder.Entity<GeneroLivro>(new GeneroLivroMap().Configure);
         }
 
     }

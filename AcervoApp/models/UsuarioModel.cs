@@ -18,9 +18,9 @@ namespace AcervoApp.models
 
         public byte[] Imagem { get; set; }
 
-        public TipoModel Tipo { get; set; }
-
         public String Bio { get; set; }
+
+        public List<FavoritoModel>? favoritos { get; set; }
 
     }
 }

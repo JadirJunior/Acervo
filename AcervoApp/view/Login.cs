@@ -1,7 +1,12 @@
 ﻿
+using AcervoApp.infra;
 using AcervoApp.models;
 using AcervoApp.utils;
+using AcervoDomain.entities;
+using Microsoft.Extensions.DependencyInjection;
 using ReaLTaiizor.Forms;
+using Service.Base;
+using Service.validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,9 +27,16 @@ namespace AcervoApp.view
         public static Login login = null;
         private static bool fecharApp = true;
 
+        private readonly IBaseService<Usuario> _usuarioService;
+        private readonly IBaseService<Livro> _livroService;
+        private readonly IBaseService<Favorito> _favoritoService;
+
         public Login()
         {
             InitializeComponent();
+            _usuarioService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Usuario>>();
+            _livroService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Livro>>();
+            _favoritoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Favorito>>();
             login = this;
             fecharApp = true;
         }
@@ -47,6 +59,38 @@ namespace AcervoApp.view
                 login.Close();
 
             }
+        }
+
+        private void checaUsuarios()
+        {
+            var usuarios = _usuarioService.Get<Usuario>(new List<String>() { "Favoritos" }).ToList();
+
+            if (!usuarios.Any())
+            {
+                var usuario = new Usuario
+                {
+                    Nome = "Jadir Junior",
+                    User = "jadir",
+                    Senha = "jadir",
+                    Bio = "Um entusiasta de obras épicas",
+                    Imagem = null,
+                    Favoritos = new List<Favorito>()
+                };
+                _usuarioService.Add<Usuario, Usuario, UsuarioValidator>(usuario);
+            }
+        }
+
+        private Usuario? obterUsuario(String user, String senha)
+        {
+            checaUsuarios();
+
+            var usuario = _usuarioService.Get<Usuario>(new List<String>() { "Favoritos" }).Where(x => x.User == user).FirstOrDefault();
+            if (usuario == null)
+            {
+                return null;
+            }
+
+            return usuario.Senha != senha ? null : usuario; 
         }
 
         private void lblCadastro_Click(object sender, EventArgs e)
@@ -76,31 +120,73 @@ namespace AcervoApp.view
             }
             else
             {
-                StaticKeys.usuarioLogado = new UsuarioModel()
+                var usuario = obterUsuario(txtUser.Text, txtSenha.Text);
+
+                if (usuario == null)
                 {
-                    Id = 1,
-                    Nome = "Jadir Pires de Borba Junior",
-                    User = "@jadirjunior8",
-                    Senha = "SenhaDaora",
-                    Imagem = null,
-                    Bio = "A vida já cansou, to morto demais",
+                    Utils.messageExclamation("Credenciais inválidas!", "Login");
+                } else
+                {
 
-                    Tipo = new TipoModel()
+                    StaticKeys.usuarioEntity = usuario;
+
+                    foreach (var fav in usuario.Favoritos)
                     {
-                        Id = 1,
-                        Tipo = 0
-                    }
-                };
 
-                new Principal().Show();
-                fecharLogin();
+                        var favorito = _favoritoService.GetById<Favorito>(fav.Id, new List<String>() { "livro" });
+
+                        var livro = _livroService.Get<Livro>().ToList().FirstOrDefault(x => x.Id == favorito.livro!.Id);
+                        
+                        if (livro != null)
+                        {
+                            StaticKeys.favoritos.Add(livro);
+                        }
+
+                    }
+
+
+                    /*StaticKeys.usuarioLogado = new UsuarioModel()
+                    {
+                        Id = usuario.Id,
+                        Nome = usuario.Nome!,
+                        User = usuario.User!,
+                        Senha = usuario.Senha!,
+                        Bio = usuario.Bio!,
+                        Imagem = usuario.Imagem!,
+                        favoritos = 
+                    };*/
+
+
+                    if (Principal.principal == null)
+                    {
+                        new Principal().Show();
+                    }
+                    else
+                    {
+                        Principal.principal.Visible = true;
+
+                        Principal.principal.carregarDados();
+                    }
+
+                    fecharLogin();
+                }
+
+                
             }
         }
 
         private void btnEntrar2_Click(object sender, EventArgs e)
         {
 
-            new Principal().Show();
+            if (Principal.principal == null)
+            {
+                new Principal().Show();
+            }
+            else
+            {
+                Principal.principal.Visible = true;
+                Principal.principal.carregarDados();
+            }
             fecharLogin();
 
         }
@@ -109,6 +195,10 @@ namespace AcervoApp.view
         {
             if (fecharApp)
             {
+                if (Principal.principal != null)
+                {
+                    Principal.principal.logout = false;
+                }
                 Application.Exit();
             }
         }

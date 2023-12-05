@@ -10,21 +10,25 @@ namespace AcervoDomain.entities
     public class Livro : BaseEntity<int>
     {
 
-        public String? titulo;
-        public String? sinopse;
-        public byte[]? thumbnail;
-        public byte[]? documento;
-        public Usuario? autor;
+        public String? Titulo;
+        public String? Sinopse;
+        public byte[]? Thumbnail;
+        public byte[]? Documento;
+        public Usuario? Autor;
+        public List<GeneroLivro> Generos;
+        public List<Avaliacao> Avaliacoes;
 
 
         public Livro() { }
 
-        public Livro(String titulo, String sinopse, byte[] documento, Usuario autor)
+        public Livro(String titulo, String sinopse, byte[] documento, Usuario autor, List<GeneroLivro> generos, List<Avaliacao> avaliacoes)
         {
-            this.titulo = titulo;
-            this.sinopse = sinopse;
-            this.documento = documento;
-            this.autor = autor;
+            this.Titulo = titulo;
+            this.Sinopse = sinopse;
+            this.Documento = documento;
+            this.Autor = autor;
+            this.Generos = generos;
+            this.Avaliacoes = avaliacoes;
         }
 
     }

@@ -1,6 +1,12 @@
-﻿using AcervoApp.models;
+﻿using AcervoApp.infra;
+using AcervoApp.models;
 using AcervoApp.utils;
+using AcervoDomain.entities;
 using MaterialSkin.Controls;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualBasic.ApplicationServices;
+using Service.Base;
+using Service.validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,9 +24,23 @@ namespace AcervoApp.view
 
         byte[] imageBytes = null;
 
+        private readonly IBaseService<Usuario> _usuarioService; 
+
         public CadastroUsuario()
         {
             InitializeComponent();
+            _usuarioService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Usuario>>();
+        }
+
+        private bool usuarioExiste(String user)
+        {
+            var usuario = _usuarioService.Get<Usuario>().Where(x => x.User == user).FirstOrDefault();
+            if (usuario == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private void btnSelecionarImagem_Click(object sender, EventArgs e)
@@ -55,32 +75,55 @@ namespace AcervoApp.view
                 else
                 
                 {
-                    Utils.messageBoxOk("Usuário Cadastrado com sucesso!", "Cadastro");
-
-                    StaticKeys.usuarioLogado = new UsuarioModel()
+                    
+                    if (usuarioExiste(txtUser.Text))
                     {
+                        Utils.messageExclamation("Usuário já cadastrado!", "Cadastro");
 
-                        Nome = txtNome.Text,
-                        User = txtUser.Text,
-                        Senha = txtSenha.Text,
-                        Bio = txtBio.Text,
-                        Imagem = imageBytes,
-                        Tipo = new TipoModel()
+                    } else
+                    {
+                        var usuario = new Usuario()
                         {
-                            Tipo = 0
-                        }
 
-                    };
+                            Nome = txtNome.Text,
+                            User = txtUser.Text,
+                            Senha = txtSenha.Text,
+                            Bio = txtBio.Text,
+                            Imagem = imageBytes
+
+                        };
+
+
+
+                        Usuario novoUsuario = _usuarioService.Add<Usuario, Usuario, UsuarioValidator>(usuario);
+
+                        StaticKeys.usuarioLogado = new UsuarioModel()
+                        {
+                            Id = novoUsuario.Id,
+                            Nome = txtNome.Text,
+                            User = txtUser.Text,
+                            Senha = txtSenha.Text,
+                            Bio = txtBio.Text,
+                            Imagem = imageBytes
+
+                        };
+
+                        StaticKeys.usuarioEntity = novoUsuario;
+
+                        Utils.messageBoxOk("Usuário Cadastrado com sucesso!", "Cadastro");
+
+                        new Principal().Show();
+                        Login.fecharLogin(false);
+                    }
+
+                    
+
                 }
-                 
-                
+
+
             }
 
             
-
-
-            new Principal().Show();
-            Login.fecharLogin(false);
 
 
         }

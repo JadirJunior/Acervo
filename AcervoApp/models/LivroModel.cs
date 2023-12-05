@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AcervoDomain.entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,13 @@ namespace AcervoApp.models
 
         public byte[]? Documento { get; set; }
 
-        public UsuarioModel? Autor { get; set; }
+        public int usuarioId { get; set; }
 
-        public List<GeneroModel>? Generos { get; set; }
+        public Usuario? Autor { get; set; }
+
+        public List<GeneroLivroModel>? Generos { get; set; }
+
+        public  List<AvaliacaoModel>? Avaliacoes { get; set; }
 
 
 

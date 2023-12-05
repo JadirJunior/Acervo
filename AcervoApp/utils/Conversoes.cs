@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PdfiumViewer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,14 @@ namespace AcervoApp.utils
                 return null;
             }
             
+
+        }
+
+        public static PdfDocument BytesToPdf(byte[] document)
+        {
+
+            var stream = new MemoryStream(document);
+            return PdfDocument.Load(stream);
 
         }
 

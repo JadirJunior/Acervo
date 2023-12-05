@@ -63,6 +63,16 @@ namespace AcervoApp.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Apagar {
+            get {
+                object obj = ResourceManager.GetObject("Apagar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CoracaoCheio {
             get {
                 object obj = ResourceManager.GetObject("CoracaoCheio", resourceCulture);
@@ -76,6 +86,36 @@ namespace AcervoApp.Properties {
         internal static System.Drawing.Bitmap CoracaoVazio {
             get {
                 object obj = ResourceManager.GetObject("CoracaoVazio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap editar {
+            get {
+                object obj = ResourceManager.GetObject("editar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap emptyStar {
+            get {
+                object obj = ResourceManager.GetObject("emptyStar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap starIcon {
+            get {
+                object obj = ResourceManager.GetObject("starIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

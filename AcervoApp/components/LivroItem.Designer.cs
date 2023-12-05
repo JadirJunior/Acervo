@@ -34,8 +34,14 @@
             txtSinopse = new ReaLTaiizor.Controls.MaterialRichTextBox();
             listGeneros = new ListView();
             pcbFavorito = new PictureBox();
+            pcbApagar = new PictureBox();
+            pcbEditar = new PictureBox();
+            btnLer = new ReaLTaiizor.Controls.ForeverButton();
+            btnComentarios = new ReaLTaiizor.Controls.ForeverButton();
             ((System.ComponentModel.ISupportInitialize)imagemUser).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbFavorito).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pcbApagar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pcbEditar).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -99,12 +105,67 @@
             pcbFavorito.TabStop = false;
             pcbFavorito.Click += pcbFavorito_Click;
             // 
+            // pcbApagar
+            // 
+            pcbApagar.Image = Properties.Resources.Apagar;
+            pcbApagar.Location = new Point(559, 200);
+            pcbApagar.Name = "pcbApagar";
+            pcbApagar.Size = new Size(33, 33);
+            pcbApagar.SizeMode = PictureBoxSizeMode.Zoom;
+            pcbApagar.TabIndex = 15;
+            pcbApagar.TabStop = false;
+            pcbApagar.Click += pcbApagar_Click;
+            // 
+            // pcbEditar
+            // 
+            pcbEditar.Image = Properties.Resources.editar;
+            pcbEditar.Location = new Point(520, 199);
+            pcbEditar.Name = "pcbEditar";
+            pcbEditar.Size = new Size(33, 33);
+            pcbEditar.SizeMode = PictureBoxSizeMode.Zoom;
+            pcbEditar.TabIndex = 16;
+            pcbEditar.TabStop = false;
+            pcbEditar.Click += pcbEditar_Click;
+            // 
+            // btnLer
+            // 
+            btnLer.BackColor = Color.Transparent;
+            btnLer.BaseColor = Color.Silver;
+            btnLer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnLer.Location = new Point(84, 197);
+            btnLer.Name = "btnLer";
+            btnLer.Rounded = true;
+            btnLer.Size = new Size(144, 35);
+            btnLer.TabIndex = 19;
+            btnLer.Text = "Ler agora";
+            btnLer.TextColor = Color.FromArgb(243, 243, 243);
+            btnLer.Click += btnLer_Click;
+            // 
+            // btnComentarios
+            // 
+            btnComentarios.BackColor = Color.Transparent;
+            btnComentarios.BackgroundImage = (Image)resources.GetObject("btnComentarios.BackgroundImage");
+            btnComentarios.BackgroundImageLayout = ImageLayout.Zoom;
+            btnComentarios.BaseColor = Color.Transparent;
+            btnComentarios.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnComentarios.Location = new Point(234, 194);
+            btnComentarios.Name = "btnComentarios";
+            btnComentarios.Rounded = false;
+            btnComentarios.Size = new Size(42, 38);
+            btnComentarios.TabIndex = 20;
+            btnComentarios.TextColor = Color.FromArgb(243, 243, 243);
+            btnComentarios.Click += btnComentarios_Click;
+            // 
             // LivroItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             BorderStyle = BorderStyle.FixedSingle;
+            Controls.Add(btnComentarios);
+            Controls.Add(btnLer);
+            Controls.Add(pcbEditar);
+            Controls.Add(pcbApagar);
             Controls.Add(pcbFavorito);
             Controls.Add(listGeneros);
             Controls.Add(txtSinopse);
@@ -117,6 +178,8 @@
             Click += LivroItem_Click;
             ((System.ComponentModel.ISupportInitialize)imagemUser).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbFavorito).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pcbApagar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pcbEditar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -127,5 +190,11 @@
         private ReaLTaiizor.Controls.MaterialRichTextBox txtSinopse;
         private ListView listGeneros;
         private PictureBox pcbFavorito;
+        private PictureBox pcbApagar;
+        private PictureBox pcbEditar;
+        private ReaLTaiizor.Controls.MaterialButton materialButton1;
+        private ReaLTaiizor.Controls.AloneButton aloneButton1;
+        private ReaLTaiizor.Controls.ForeverButton btnLer;
+        private ReaLTaiizor.Controls.ForeverButton btnComentarios;
     }
 }

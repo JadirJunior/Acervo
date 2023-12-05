@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{DE510BB6-3F90-4EB5-8B36-CE8CB3E85826}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcervoApp", "AcervoApp\AcervoApp.csproj", "{9F717B3C-AE8D-4FDB-8906-B9A18C8BF223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcervoApp", "AcervoApp\AcervoApp.csproj", "{9F717B3C-AE8D-4FDB-8906-B9A18C8BF223}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

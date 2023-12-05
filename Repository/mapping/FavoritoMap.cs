@@ -19,7 +19,8 @@ namespace Repository.mapping
 
             builder.HasOne(prop => prop.livro);
 
-            builder.HasOne(prop => prop.usuario);
+            builder.HasOne(prop => prop.usuario)
+                .WithMany(prop => prop.Favoritos);
         }
     }
 }

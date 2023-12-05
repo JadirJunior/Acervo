@@ -11,9 +11,16 @@ namespace AcervoApp.models
 
         public int Id { get; set; }
         public String? Comentario { get; set; }
-        public int Estrelas { get; set; }   
+
+        public int Estrelas { get; set; }  
+
+        public int livroId { get; set; }
+
+        public int usuarioId { get; set; }
 
         public LivroModel? Livro { get; set; }
+
+        public UsuarioModel? Usuario { get; set; }
 
     }
 }

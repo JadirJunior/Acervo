@@ -14,19 +14,19 @@ namespace AcervoDomain.entities
         public String? User;
         public String? Senha;
         public byte[]? Imagem;
-        public Tipo? tipo;
         public String? Bio;
+        public List<Favorito> Favoritos;
 
         public Usuario() { }
 
 
-        public Usuario(String nome, String user, String senha, Tipo tipo, String Bio)
+        public Usuario(String nome, String user, String senha, String Bio, List<Favorito> favoritos)
         {
-            this.Nome= nome;
-            this.User= user;
-            this.Senha= senha;
-            this.tipo= tipo;
-            this.Bio= Bio;
+            this.Nome = nome;
+            this.User = user;
+            this.Senha = senha;
+            this.Bio = Bio;
+            this.Favoritos = favoritos;
         }
 
     }

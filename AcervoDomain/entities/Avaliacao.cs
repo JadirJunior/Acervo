@@ -9,19 +9,21 @@ namespace AcervoDomain.entities
 {
     public class Avaliacao : BaseEntity<int>
     {
-            
-        public String? comentario;
-        public int? estrelas;
-        public Livro? livro;
+
+        public Usuario? Usuario;
+        public String? Comentario;
+        public int? Estrelas;
+        public Livro? Livro;
         
 
         public Avaliacao() { }
 
-        public Avaliacao(String comentario, int estrelas, Livro livro)
+        public Avaliacao(String comentario, int estrelas, Livro livro, Usuario usuario)
         {
-            this.comentario = comentario;
-            this.estrelas = estrelas;
-            this.livro = livro;
+            this.Comentario = comentario;
+            this.Estrelas = estrelas;
+            this.Livro = livro;
+            this.Usuario = usuario;
         }
     }
 }

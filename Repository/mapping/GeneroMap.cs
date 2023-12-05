@@ -17,7 +17,7 @@ namespace Repository.mapping
 
             builder.HasKey(prop => prop.Id);
 
-            builder.Property(prop => prop.descricao)
+            builder.Property(prop => prop.tipo)
                 .IsRequired()
                 .HasColumnType("varchar(45)");
 

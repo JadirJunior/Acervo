@@ -1,6 +1,12 @@
-﻿using AcervoApp.models;
+﻿using AcervoApp.infra;
+using AcervoApp.models;
 using AcervoApp.Properties;
 using AcervoApp.utils;
+using AcervoApp.view;
+using AcervoDomain.entities;
+using Microsoft.Extensions.DependencyInjection;
+using Service.Base;
+using Service.validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,38 +24,64 @@ namespace AcervoApp.components
 
         private bool vazio = true;
 
-        private LivroModel livroModel;
+        private Livro livroModel;
 
-        public LivroItem()
-        {
-            InitializeComponent();
-        }
 
-        public LivroItem(LivroModel livro)
+        private readonly IBaseService<GeneroLivro> _generoLivroService;
+        private readonly IBaseService<Favorito> _favoritosService;
+
+        public LivroItem(Livro livro)
         {
             InitializeComponent();
             livroModel = livro;
+            _generoLivroService = Principal.principal!._generoLivroService;
+            _favoritosService = Principal.principal._favoritoService;
+
+            if (StaticKeys.usuarioEntity == null)
+            {
+                btnComentarios.Enabled = false;
+                btnComentarios.Visible = false;
+                pcbFavorito.Enabled = false;
+                pcbFavorito.Visible = false;
+                pcbApagar.Enabled = false;
+                pcbApagar.Visible = false;
+                pcbEditar.Enabled = false;
+                pcbEditar.Visible = false;
+
+            } else
+            {
+                var ret = StaticKeys.favoritos.Find(x => x.Id == livro.Id);
+
+                if (ret != null)
+                {
+                    vazio = false;
+                    pcbFavorito.Image = Resources.CoracaoCheio;
+                }
+
+                if (livroModel.Autor?.Id != StaticKeys.usuarioEntity?.Id)
+                {
+                    pcbApagar.Enabled = false;
+                    pcbApagar.Visible = false;
+                    pcbEditar.Enabled = false;
+                    pcbEditar.Visible = false;
+                }
+            }
 
             lblTitulo.Text = livro.Titulo;
             txtSinopse.Text = livro.Sinopse;
 
-            if (livro.Autor != null &&  livro.Autor.Imagem != null)
+            if (livro.Autor != null && livro.Autor.Imagem != null)
             {
                 imagemUser.Image = Conversoes.BytesToImage(livro.Autor.Imagem);
             }
 
-            foreach (GeneroModel model in livro.Generos)
+            foreach (GeneroLivro model in livro.Generos)
             {
-                listGeneros.Items.Add(model.Tipo);
+                
+                listGeneros.Items.Add(_generoLivroService.GetById<GeneroLivro>(model.Id, new List<String>() { "Genero" }).Genero!.tipo);
+
             }
 
-            var ret = StaticKeys.favoritos.Find(x => x.Id == livro.Id);
-
-            if (ret != null)
-            {
-                vazio = false;
-                pcbFavorito.Image = Resources.CoracaoCheio;
-            }
         }
 
         private void LivroItem_Load(object sender, EventArgs e)
@@ -59,12 +91,11 @@ namespace AcervoApp.components
 
         private void imagemUser_Click(object sender, EventArgs e)
         {
-
+            //Sobre o Autor
         }
 
         private void LivroItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Abriu um livro novo!!");
         }
 
         private void imagemUser_MouseHover(object sender, EventArgs e)
@@ -82,19 +113,82 @@ namespace AcervoApp.components
             if (vazio)
             {
                 pcbFavorito.Image = Resources.CoracaoCheio;
-                StaticKeys.favoritos.Add(livroModel);
 
-            } else
+
+
+
+                _favoritosService.Add<Favorito, Favorito, FavoritoValidator>(new Favorito()
+                {
+                    livro = livroModel,
+                    usuario = StaticKeys.usuarioEntity
+                });
+
+                StaticKeys.favoritos.Add(livroModel);
+            }
+            else
             {
                 pcbFavorito.Image = Resources.CoracaoVazio;
                 var item = StaticKeys.favoritos.FirstOrDefault(x => x.Id == livroModel.Id);
+
                 if (item != null)
                 {
+
+                    var favoritoDelete = _favoritosService.Get<Favorito>(new List<String>() { "livro" }).ToList().FirstOrDefault(x => x.livro!.Id == item.Id);
+
+                    _favoritosService.Delete(favoritoDelete!.Id);
+
                     StaticKeys.favoritos.Remove(item);
+
+                    if (Principal.principal != null)
+                    {
+                        Principal.principal.carregarFavoritos();
+                    }
                 }
             }
 
             vazio = !vazio;
+        }
+
+        private void pcbApagar_Click(object sender, EventArgs e)
+        {
+            var ret = StaticKeys.livros.FirstOrDefault(x => x.Id == livroModel.Id);
+            if (
+                Utils.messageQuestion("Tem certeza que deseja apagar esta obra? (A operação não poderá ser refeita.)", "Livro")
+                == DialogResult.Yes)
+            {
+                if (ret != null)
+                {
+                    StaticKeys.livros.Remove(ret);
+                    Utils.messageBoxOk("Obra excluída com sucesso!", "Livro");
+                    if (Principal.principal != null)
+                    {
+                        Principal.principal.carregarObras();
+                        Principal.principal.carregarFavoritos();
+                    }
+                }
+                else
+                {
+                    Utils.messageExclamation("Ocorreu um erro, tente novamente", "Erro");
+                }
+
+            }
+
+
+        }
+
+        private void btnLer_Click(object sender, EventArgs e)
+        {
+            new FormDadosLivro(livroModel).ShowDialog();
+        }
+
+        private void pcbEditar_Click(object sender, EventArgs e)
+        {
+            new FormNovoLivro(livroModel).ShowDialog();
+        }
+
+        private void btnComentarios_Click(object sender, EventArgs e)
+        {
+            new FormComentarios(livroModel).ShowDialog();
         }
     }
 }

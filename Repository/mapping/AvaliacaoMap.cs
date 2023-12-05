@@ -17,15 +17,18 @@ namespace Repository.mapping
 
             builder.HasKey(prop => prop.Id);
 
-            builder.Property(prop => prop.comentario)
+            builder.Property(prop => prop.Comentario)
                 .IsRequired()
                 .HasColumnType("varchar(255)");
 
-            builder.Property(prop => prop.estrelas)
+            builder.Property(prop => prop.Estrelas)
                 .IsRequired()
                 .HasColumnType("int");
 
-            builder.HasOne(prop => prop.livro);
+            builder.HasOne(prop => prop.Livro)
+                .WithMany(prop => prop.Avaliacoes);
+
+            builder.HasOne(prop => prop.Usuario);
 
         }
     }

@@ -1,11 +1,13 @@
 ﻿using AcervoApp.components;
 using AcervoApp.infra;
 using AcervoApp.models;
+using AcervoApp.Properties;
 using AcervoApp.utils;
 using AcervoDomain.entities;
 using Microsoft.Extensions.DependencyInjection;
 using ReaLTaiizor.Forms;
 using Service.Base;
+using Service.validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,77 +23,83 @@ namespace AcervoApp.view
     public partial class Principal : MaterialForm
     {
 
+        public bool logout = false;
 
-        private void carregarObras()
+        public readonly IBaseService<Livro> _livroService;
+        public readonly IBaseService<Usuario> _usuarioService;
+        public readonly IBaseService<Favorito> _favoritoService;
+        public readonly IBaseService<GeneroLivro> _generoLivroService;
+        public readonly IBaseService<Genero> _generoService;
+
+
+        public static Principal? principal;
+        public int contagemId = 0;
+
+
+        public void carregarObras()
         {
             panel.Controls.Clear();
-            for (int i = 0; i < 5; i++)
+
+            foreach ( var livro in _livroService.Get<Livro>(new List<String> { "Generos", "Autor", "Avaliacoes" }).ToList())
             {
-                panel.Controls.Add(new LivroItem(new LivroModel()
-                {
-                    Id = i,
-                    Documento = null,
-                    Generos = new List<GeneroModel>(),
-                    Sinopse = "Livro daora",
-                    Thumbnail = null,
-                    Titulo = "Título legal",
-
-                    Autor = new UsuarioModel()
-                    {
-                        Id = 2,
-                        Nome = "Roberto",
-                        User = "@robertinho02",
-                        Imagem = null,
-                        Bio = "Bio Daora do carinha."
-                    }
-
-
-                }));
-            }
-
-            foreach (LivroModel model in StaticKeys.livros)
-            {
-                panel.Controls.Add(new LivroItem(model));
+                panel.Controls.Add(new LivroItem(livro));
             }
 
 
         }
 
-        private void carregarFavoritos()
+        public void carregarFavoritos()
         {
             panelFav.Controls.Clear();
 
-            foreach (LivroModel model in StaticKeys.favoritos)
+            foreach (var favorito in _favoritoService.Get<Favorito>(new List<String> { "livro", "usuario"}).ToList().Where(x => x.usuario!.Id == StaticKeys.usuarioEntity!.Id))
             {
-                panelFav.Controls.Add(new LivroItem(model));
+                var livro = _livroService.GetById<Livro>(favorito.livro!.Id, new List<String> { "Generos", "Autor", "Avaliacoes" });
+                panelFav.Controls.Add(new LivroItem(livro));
             }
 
         }
 
         private void resetarCampos()
         {
-            txtNome.Text = StaticKeys.usuarioLogado.Nome;
-            txtBio.Text = StaticKeys.usuarioLogado.Bio;
-            txtUser.Text = StaticKeys.usuarioLogado.User;
-            txtSenha.Text = StaticKeys.usuarioLogado.Senha;
+            txtNome.Text = StaticKeys.usuarioEntity!.Nome;
+            txtBio.Text = StaticKeys.usuarioEntity.Bio;
+            txtUser.Text = StaticKeys.usuarioEntity.User;
+            txtSenha.Text = StaticKeys.usuarioEntity.Senha;
 
-            if (StaticKeys.usuarioLogado.Imagem != null)
+            if (StaticKeys.usuarioEntity.Imagem != null)
             {
-                //Carregue a imagem!
-                imagemUser.Image = Conversoes.BytesToImage(StaticKeys.usuarioLogado.Imagem);
+                imagemUser.Image = Conversoes.BytesToImage(StaticKeys.usuarioEntity.Imagem);
+            } else
+            {
+                imagemUser.Image = Resources.UserIcon;
             }
         }
 
+        public void carregarDados()
+        {
+            pages.SelectedIndex = 0;
+
+            if (StaticKeys.usuarioEntity == null)
+            {
+                pages.Controls.Remove(tabUser);
+                pages.Controls.Remove(tabFavoritos);
+                pages.Controls.Remove(tabLoggout);
+            }
+            principal = this;
+            logout = false;
+            carregarObras();
+        }
 
         public Principal()
         {
             InitializeComponent();
-            if (StaticKeys.usuarioLogado == null)
-            {
-                pages.Controls.Remove(tabUser);
-                pages.Controls.Remove(tabFavoritos);
-            }
-            carregarObras();
+            _generoLivroService = ConfigureDI.ServicesProvider!.GetService<IBaseService<GeneroLivro>>();
+            _livroService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Livro>>();
+            _usuarioService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Usuario>>();
+            _favoritoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Favorito>>();
+            _generoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Genero>>();
+            carregarDados();
         }
 
 
@@ -107,21 +115,25 @@ namespace AcervoApp.view
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            if (StaticKeys.usuarioLogado != null)
+            if (StaticKeys.usuarioEntity != null)
             {
-                StaticKeys.usuarioLogado.Nome = txtNome.Text;
-                StaticKeys.usuarioLogado.User = txtUser.Text;
-                StaticKeys.usuarioLogado.Senha = txtSenha.Text;
-                StaticKeys.usuarioLogado.Bio = txtBio.Text;
-                StaticKeys.usuarioLogado.Imagem = Conversoes.ImageToBytes(imagemUser.Image);
-                //Fazer o salvamento da imagem
+                StaticKeys.usuarioEntity.Nome = txtNome.Text;
+                StaticKeys.usuarioEntity.User = txtUser.Text;
+                StaticKeys.usuarioEntity.Senha = txtSenha.Text;
+                StaticKeys.usuarioEntity.Bio = txtBio.Text;
+                StaticKeys.usuarioEntity.Imagem = Conversoes.ImageToBytes(imagemUser.Image);
+
+                _usuarioService.Update<Usuario, Usuario, UsuarioValidator>(StaticKeys.usuarioEntity);
+
+
+
                 Utils.messageBoxOk("Perfil salvo com sucesso!", "Usuário");
             }
         }
 
         private void tabUser_Enter(object sender, EventArgs e)
         {
-            if (StaticKeys.usuarioLogado != null)
+            if (StaticKeys.usuarioEntity != null)
             {
                 resetarCampos();
             }
@@ -133,12 +145,10 @@ namespace AcervoApp.view
             if (cmbMostraSenha.Checked)
             {
                 txtSenha.PasswordChar = default;
-                //txtSenha.Text = StaticKeys.usuarioLogado.Senha;
             }
             else
             {
                 txtSenha.PasswordChar = '*';
-                //txtSenha.Text = StaticKeys.usuarioLogado.Senha;
             }
         }
 
@@ -161,6 +171,29 @@ namespace AcervoApp.view
             {
                 byte[] imageBytes = File.ReadAllBytes(opfUser.FileName);
                 imagemUser.Image = Image.FromFile(opfUser.FileName);
+            }
+        }
+
+        private void tabLoggout_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabLoggout_Enter(object sender, EventArgs e)
+        {
+            StaticKeys.reset();
+            this.logout = true;
+            new Login().Show();
+
+            this.Close();
+        }
+
+        private void Principal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (logout)
+            {
+                e.Cancel = true;
+                this.Hide();
             }
         }
     }

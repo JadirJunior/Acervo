@@ -36,7 +36,8 @@ namespace Repository.mapping
             builder.Property(prop => prop.Imagem)
                 .HasColumnType("blob");
 
-            builder.HasOne(prop => prop.tipo);
+            builder.HasMany(prop => prop.Favoritos)
+                .WithOne(prop => prop.usuario);
 
 
 

@@ -20,33 +20,10 @@ namespace Test
 
 
         [TestMethod]
-        public void TestTipo()
-        {
-
-            var sp = ConfiguraServices();
-            var tipoService = sp.GetService<IBaseService<Tipo>>();
-
-            var tipo = new Tipo
-            {
-                tipo = 1
-            };
-
-
-            var result = tipoService?.Add<Tipo, Tipo, TipoValidator>(tipo);
-
-
-
-            Console.WriteLine(JsonSerializer.Serialize(result));
-
-        }
-
-
-        [TestMethod]
         public void TestInserirUsuario()
         {
 
             var sp = ConfiguraServices();
-            var tipoService = sp.GetService<IBaseService<Tipo>>();
             var usuarioService = sp.GetService<IBaseService<Usuario>>();
 
 
@@ -56,8 +33,7 @@ namespace Test
                 User = "Macaco06",
                 Senha = "12345",
                 Bio = "Alguém com um grande objetivo de fazer nada.",
-                Imagem = null,
-                tipo = tipoService?.GetById<Tipo>(1)
+                Imagem = null
             };
 
 
@@ -89,9 +65,6 @@ namespace Test
                 });
             });
 
-            services.AddScoped<IBaseRepository<Tipo>, BaseRepository<Tipo>>();
-            services.AddScoped<IBaseService<Tipo>, BaseService<Tipo>>();
-
             services.AddScoped<IBaseRepository<Usuario>, BaseRepository<Usuario>>();
             services.AddScoped<IBaseService<Usuario>, BaseService<Usuario>>();
 
@@ -104,19 +77,17 @@ namespace Test
             services.AddScoped<IBaseRepository<Genero>, BaseRepository<Genero>>();
             services.AddScoped<IBaseService<Genero>, BaseService<Genero>>();
 
-            services.AddScoped<IBaseRepository<GeneroTipo>, BaseRepository<GeneroTipo>>();
-            services.AddScoped<IBaseService<GeneroTipo>, BaseService<GeneroTipo>>();
+            services.AddScoped<IBaseRepository<GeneroLivro>, BaseRepository<GeneroLivro>>();
+            services.AddScoped<IBaseService<GeneroLivro>, BaseService<GeneroLivro>>();
 
             services.AddScoped<IBaseRepository<Livro>, BaseRepository<Livro>>();
             services.AddScoped<IBaseService<Livro>, BaseService<Livro>>();
 
-
-            services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Tipo, Tipo>(); }).CreateMapper());
             services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Usuario, Usuario>(); }).CreateMapper());
             services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Avaliacao, Avaliacao>(); }).CreateMapper());
             services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Favorito, Favorito>(); }).CreateMapper());
             services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Genero, Genero>(); }).CreateMapper());
-            services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<GeneroTipo, GeneroTipo>(); }).CreateMapper());
+            services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<GeneroLivro, GeneroLivro>(); }).CreateMapper());
             services.AddSingleton(new MapperConfiguration(config => { config.CreateMap<Livro, Livro>(); }).CreateMapper());
 
             return services.BuildServiceProvider();

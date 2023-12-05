@@ -1,6 +1,11 @@
-﻿using AcervoApp.models;
+﻿using AcervoApp.infra;
+using AcervoApp.models;
 using AcervoApp.utils;
+using AcervoDomain.entities;
+using Microsoft.Extensions.DependencyInjection;
 using ReaLTaiizor.Forms;
+using Service.Base;
+using Service.validators;
 using Spire.Pdf;
 using System;
 using System.Collections.Generic;
@@ -20,16 +25,85 @@ namespace AcervoApp.view
 
         byte[] novaObra = null;
         byte[] thumbnail = null;
+        bool edicao;
+
+        Livro livro;
+        List<Genero> Generos = new List<Genero>();
+        List<GeneroModel> generoModels = new List<GeneroModel>();
+        List<GeneroLivro> selecionados2 = new List<GeneroLivro>();
+
+        private readonly IBaseService<Genero> _generoService;
+        private readonly IBaseService<GeneroLivro> _generoLivroService;
+        private readonly IBaseService<Livro> _livroService;
+
+        void inicializarGeneros()
+        {
+            var generos = _generoService!.Get<Genero>().ToList();
+
+            foreach (var genero in generos)
+            {
+                lstGeneros.Items.Add(genero.tipo);
+                Generos.Add(genero);
+            }
+        }
 
         public FormNovoLivro()
         {
             InitializeComponent();
-            lstGeneros.Items.Add("Terror");
-            lstGeneros.Items.Add("Romance");
-            lstGeneros.Items.Add("Suspense");
-            lstGeneros.Items.Add("Drama");
-            lstGeneros.Items.Add("Comédia");
-            lstGeneros.Items.Add("Aventura");
+            _generoService = Principal.principal._generoService;
+            _livroService = Principal.principal._livroService;
+            _generoLivroService = Principal.principal._generoLivroService;
+
+            inicializarGeneros();
+            
+
+            edicao = false;
+        }
+
+        public FormNovoLivro(Livro livro)
+        {
+            InitializeComponent();
+            _generoService = Principal.principal._generoService;
+            _livroService = Principal.principal._livroService;
+            _generoLivroService = Principal.principal._generoLivroService;
+
+            this.livro = livro;
+
+            inicializarGeneros();
+
+
+            foreach (ListViewItem item in lstGeneros.Items)
+            {
+                var g = Generos.Find(x => x.tipo == item.Text);
+
+                var generoTipo = _generoLivroService!.Get<GeneroLivro>(new List<String>() { "Genero", "Livro" })
+                        .FirstOrDefault(x => x.Livro!.Id == livro.Id && x.Genero!.Id == g.Id);
+
+                if (generoTipo != null)
+                {
+                    selecionados2.Add(generoTipo);
+
+                    lstGeneros.Items[lstGeneros.Items.IndexOf(item)].Focused = true;
+                    lstGeneros.Items[lstGeneros.Items.IndexOf(item)].Selected = true;
+                    lstGeneros.Select();
+                }
+            }
+
+            txtTitulo.Text = livro.Titulo;
+            txtSinopse.Text = livro.Sinopse;
+
+            if (livro.Documento != null)
+            {
+                novaObra = livro.Documento;
+            }
+
+            if (livro.Thumbnail != null)
+            {
+                thumbnail = livro.Thumbnail;
+                pcbImagem.Image = Conversoes.BytesToImage(livro.Thumbnail);
+            }
+
+            edicao = true;
         }
 
         private void btnSelecionarPdf_Click(object sender, EventArgs e)
@@ -64,32 +138,72 @@ namespace AcervoApp.view
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            //Salvar um novo livro.
 
-            List<GeneroModel> generos = new List<GeneroModel>();
+            Livro livroAtualizado = new Livro()
+            { 
+               Autor = StaticKeys.usuarioEntity,
+               Avaliacoes = new List<Avaliacao>(),
+               Documento = novaObra,
+               Titulo = txtTitulo.Text,
+               Sinopse = txtSinopse.Text,
+               Thumbnail = thumbnail
+            };
 
             foreach (int a in lstGeneros.SelectedIndices)
             {
-                generos.Add(new GeneroModel()
+                var gen = Generos.FirstOrDefault(x => x.tipo == lstGeneros.Items[a].Text);
+                if (gen != null)
                 {
-                    Descricao = "Um gênero qualquer...",
-                    Tipo = lstGeneros.Items[a].Text
-                }) ;
+                    selecionados2.Add(new GeneroLivro()
+                    {
+                        Genero = gen,
+                        Livro = livroAtualizado
+                    });
+
+                }
             }
 
-            StaticKeys.livros.Add(new LivroModel()
+            livroAtualizado.Generos = selecionados2;
+
+            if (!edicao)
             {
-                Autor = StaticKeys.usuarioLogado,
-                Documento = novaObra,
-                Titulo = txtTitulo.Text,
-                Thumbnail = thumbnail,
-                Sinopse = txtSinopse.Text,
-                Generos = generos
-            });
+                var livros = _livroService.Get<Livro>().ToList();
+                _livroService.Add<Livro, Livro, LivroValidator>(livroAtualizado);
+
+                foreach (var g in livroAtualizado.Generos)
+                {
+                    _generoLivroService.Add<GeneroLivro, GeneroLivro, GeneroLivroValidator>(g);
+                }
+
+                Utils.messageBoxOk("Livro inserido com sucesso!", "Cadastro de Livro");
+
+                this.Close();
+            }
+            else {
 
 
-            MessageBox.Show("Livro salvo com sucesso!", "Livro", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+                _livroService.Update<Livro, Livro, LivroValidator>(livroAtualizado);
+
+                Utils.messageBoxOk("Livro atualizado com sucesso!", "Edição");
+
+                this.Close();
+            }
+
+        }
+
+        private void lstGeneros_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (edicao)
+            {
+                if (lstGeneros.SelectedIndices.Count == 1)
+                {
+                    if (Utils.messageQuestion("Tem certeza que deseja excluir este gênero?", "Livro") == DialogResult.Yes)
+                    {
+                        lstGeneros.Items.RemoveAt(lstGeneros.SelectedIndices[0]);
+                    }
+                }
+            }
+            
         }
     }
 }

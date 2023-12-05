@@ -38,7 +38,11 @@ namespace Service.services
             return outputModel;
         }
 
-        public void Delete(int id) => _baseRepository.Delete(id);
+        public void Delete(int id)
+        {
+            _baseRepository.ClearChangeTracker();
+            _baseRepository.Delete(id);
+        }
 
         public IEnumerable<TOutputModel> Get<TOutputModel>(IList<string>? includes = null) where TOutputModel : class
         {
@@ -72,7 +76,7 @@ namespace Service.services
 
             Validate(entity, Activator.CreateInstance<TValidator>());
 
-            //_baseRepository.ClearChangeTracker();
+            _baseRepository.ClearChangeTracker();
             _baseRepository.Update(entity);
 
             var outputModel = _mapper.Map<TOutputModel>(entity);

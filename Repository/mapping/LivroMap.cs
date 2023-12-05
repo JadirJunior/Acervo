@@ -17,24 +17,29 @@ namespace Repository.mapping
 
             builder.HasKey(prop => prop.Id);
 
-            builder.Property(prop => prop.titulo)
+            builder.Property(prop => prop.Titulo)
                 .IsRequired()
                 .HasColumnType("varchar(70)");
 
-            builder.Property(prop => prop.sinopse)
+            builder.Property(prop => prop.Sinopse)
                 .IsRequired()
                 .HasColumnType("varchar(255)");
 
-            builder.Property(prop => prop.documento)
+            builder.Property(prop => prop.Documento)
+                .IsRequired()
+                .HasColumnType("longblob");
+
+            builder.Property(prop => prop.Thumbnail)
                 .IsRequired()
                 .HasColumnType("blob");
 
-            builder.Property(prop => prop.thumbnail)
-                .IsRequired()
-                .HasColumnType("blob");
+            builder.HasOne(prop => prop.Autor);
 
-            builder.HasOne(prop => prop.autor);
+            builder.HasMany(prop => prop.Generos)
+                .WithOne(prop => prop.Livro);
 
+            builder.HasMany(prop => prop.Avaliacoes)
+                .WithOne(prop => prop.Livro);
 
         }
     }
