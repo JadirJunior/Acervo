@@ -30,6 +30,7 @@ namespace AcervoApp.view
         public readonly IBaseService<Favorito> _favoritoService;
         public readonly IBaseService<GeneroLivro> _generoLivroService;
         public readonly IBaseService<Genero> _generoService;
+        public readonly IBaseService<Avaliacao> _avaliacaoService;
 
 
         public static Principal? principal;
@@ -99,6 +100,7 @@ namespace AcervoApp.view
             _usuarioService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Usuario>>();
             _favoritoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Favorito>>();
             _generoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Genero>>();
+            _avaliacaoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Avaliacao>>();
             carregarDados();
         }
 

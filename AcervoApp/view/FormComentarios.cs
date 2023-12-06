@@ -3,6 +3,7 @@ using AcervoApp.models;
 using AcervoApp.utils;
 using AcervoDomain.entities;
 using ReaLTaiizor.Forms;
+using Service.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,18 +20,27 @@ namespace AcervoApp.view
     {
 
         public static FormComentarios formComentarios;
-        Livro livroModel;
+        public Livro livroModel;
+
+
+        public readonly IBaseService<Avaliacao> _avaliacaoService;
 
         public void atualizarPagina()
         {
-            if (livroModel.Avaliacoes != null )
+            panelComentarios.Controls.Clear();
+
+            livroModel.Avaliacoes = _avaliacaoService.Get<Avaliacao>(new List<String> { "Livro", "Usuario" })
+                    .Where(x => x.Livro!.Id == livroModel.Id).ToList();
+
+            if (livroModel.Avaliacoes != null)
             {
                 foreach (var avaliacao in livroModel.Avaliacoes)
                 {
+
                     panelComentarios.Controls.Add(new ComentarioItem(avaliacao));
                 }
             }
-            
+
         }
 
 
@@ -38,7 +48,14 @@ namespace AcervoApp.view
         {
             InitializeComponent();
             formComentarios = this;
+
+            _avaliacaoService = Principal.principal!._avaliacaoService;
+
             this.livroModel = livro;
+
+            livroModel.Avaliacoes = _avaliacaoService.Get<Avaliacao>(new List<String> { "Livro", "Usuario" })
+                    .Where(x => x.Livro!.Id == livroModel.Id).ToList();
+
             if (livro.Avaliacoes != null)
             {
 
@@ -49,9 +66,9 @@ namespace AcervoApp.view
 
             }
 
-            if (livro.Autor != null && StaticKeys.usuarioLogado != null)
+            if (livro.Autor != null && StaticKeys.usuarioEntity != null)
             {
-                if (livro.Autor.Id == StaticKeys.usuarioLogado.Id)
+                if (livro.Autor.Id == StaticKeys.usuarioEntity.Id)
                 {
                     btnAvaliar.Visible = false;
                     btnAvaliar.Enabled = false;

@@ -20,5 +20,7 @@ namespace AcervoApp.models
 
         public Genero Genero { get; set; }
 
+        public String tipoGenero { get; set; }
+
     }
 }

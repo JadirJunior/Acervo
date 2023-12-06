@@ -167,8 +167,7 @@ namespace AcervoApp.infra
                     .ForMember(d => d.Id, d => d.MapFrom(x => $"{x.Id}"))
                     .ForMember(d => d.livroId, d => d.MapFrom(x => $"{x.Livro!.Id}"))
                     .ForMember(d => d.generoId, d => d.MapFrom(x => $"{x.Genero!.Id}"))
-                    .ForMember(d => d.Livro, d => d.MapFrom(x => $"{x.Livro}"))
-                    .ForMember(d => d.Genero, d => d.MapFrom(x => $"{x.Genero}"));
+                    .ForMember(d => d.tipoGenero, d => d.MapFrom(x => $"{x.Genero!.tipo}"));
             }).CreateMapper());
 
 

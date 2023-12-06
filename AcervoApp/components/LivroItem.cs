@@ -29,6 +29,8 @@ namespace AcervoApp.components
 
         private readonly IBaseService<GeneroLivro> _generoLivroService;
         private readonly IBaseService<Favorito> _favoritosService;
+        private readonly IBaseService<Livro> _livroService;
+        private readonly IBaseService<Avaliacao> _avaliacaoService;
 
         public LivroItem(Livro livro)
         {
@@ -36,6 +38,8 @@ namespace AcervoApp.components
             livroModel = livro;
             _generoLivroService = Principal.principal!._generoLivroService;
             _favoritosService = Principal.principal._favoritoService;
+            _livroService = Principal.principal._livroService;
+            _avaliacaoService = Principal.principal._avaliacaoService;
 
             if (StaticKeys.usuarioEntity == null)
             {
@@ -151,25 +155,59 @@ namespace AcervoApp.components
 
         private void pcbApagar_Click(object sender, EventArgs e)
         {
-            var ret = StaticKeys.livros.FirstOrDefault(x => x.Id == livroModel.Id);
             if (
                 Utils.messageQuestion("Tem certeza que deseja apagar esta obra? (A operação não poderá ser refeita.)", "Livro")
                 == DialogResult.Yes)
             {
-                if (ret != null)
+
+
+                try
                 {
-                    StaticKeys.livros.Remove(ret);
-                    Utils.messageBoxOk("Obra excluída com sucesso!", "Livro");
+
+                    var favoritos = _favoritosService.Get<Favorito>(new List<String>() { "usuario", "livro" })
+                            .Where(x => x.usuario!.Id == StaticKeys.usuarioEntity!.Id && x.livro!.Id == livroModel.Id).ToList();
+
+
+                    var generos = _generoLivroService.Get<GeneroLivro>(new List<String>() { "Livro" })
+                            .Where(x => x.Livro!.Id == livroModel.Id).ToList();
+
+                    var avaliacoes = _avaliacaoService.Get<Avaliacao>(new List<String>() { "Livro" })
+                            .Where(x => x.Livro!.Id == livroModel.Id).ToList();
+
+
+                    foreach (var aval in avaliacoes)
+                    {
+                        _avaliacaoService.Delete(aval.Id);
+                    }
+
+                    foreach (var fav in favoritos)
+                    {
+                        _favoritosService.Delete(fav.Id);
+                    }
+
+                    foreach (var gen in generos)
+                    {
+                        _generoLivroService.Delete(gen.Id);
+                    }
+
+                    _livroService.Delete(livroModel.Id);
+
+                    Utils.messageBoxOk("Livro deletado com sucesso!", "Deletar livro");
+
                     if (Principal.principal != null)
                     {
-                        Principal.principal.carregarObras();
-                        Principal.principal.carregarFavoritos();
+                        Principal.principal!.carregarFavoritos();
+                        Principal.principal!.carregarObras();
                     }
-                }
-                else
+                    
+
+                } 
+                
+                catch (Exception ex)
                 {
                     Utils.messageExclamation("Ocorreu um erro, tente novamente", "Erro");
                 }
+
 
             }
 

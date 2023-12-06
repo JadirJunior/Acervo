@@ -58,7 +58,6 @@
             // 
             panelComentarios.AutoScroll = true;
             panelComentarios.Dock = DockStyle.Bottom;
-            panelComentarios.FlowDirection = FlowDirection.TopDown;
             panelComentarios.Location = new Point(3, 138);
             panelComentarios.Name = "panelComentarios";
             panelComentarios.Size = new Size(864, 395);

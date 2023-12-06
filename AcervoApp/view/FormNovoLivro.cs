@@ -182,9 +182,54 @@ namespace AcervoApp.view
             else {
 
 
-                _livroService.Update<Livro, Livro, LivroValidator>(livroAtualizado);
+                var generosLivro = _generoLivroService.Get<GeneroLivroModel>(new List<String>() { "Genero", "Livro" })
+                        .Where(x => x.Livro!.Id == livro.Id).ToList();
+
+                livroAtualizado.Id = livro.Id;
+                
+                livroAtualizado.Generos.Clear();
+                var livroNovo = _livroService.Update<Livro, Livro, LivroValidator>(livroAtualizado);
+
+                foreach (ListViewItem item in lstGeneros.Items)
+                {
+
+                    //Salvando os generos novos e editado
+                    var ret = generosLivro.Find(x => x.tipoGenero == item.Text);
+
+                    if (ret != null)
+                    {
+                        _generoLivroService.Delete(ret.Id);
+
+                        if (item.Selected)
+                        {
+                            _generoLivroService.Add<GeneroLivro, GeneroLivro, GeneroLivroValidator>(
+                                new GeneroLivro()
+                                {
+                                    Genero = _generoService.GetById<Genero>(ret.generoId),
+                                    Livro = livroNovo
+                                });
+                        }
+                    } else
+                    {
+                        if (item.Selected)
+                        {
+                            _generoLivroService.Add<GeneroLivro, GeneroLivro, GeneroLivroValidator>(
+                                new GeneroLivro()
+                                {
+                                    Genero = _generoService.Get<Genero>().Where(x => x.tipo == item.Text).FirstOrDefault(),
+                                    Livro = livroNovo
+                                });
+                        }
+                    }
+
+                }
 
                 Utils.messageBoxOk("Livro atualizado com sucesso!", "Edição");
+
+                if (Principal.principal != null)
+                {
+                    Principal.principal.carregarObras();
+                }
 
                 this.Close();
             }
@@ -192,18 +237,7 @@ namespace AcervoApp.view
         }
 
         private void lstGeneros_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (edicao)
-            {
-                if (lstGeneros.SelectedIndices.Count == 1)
-                {
-                    if (Utils.messageQuestion("Tem certeza que deseja excluir este gênero?", "Livro") == DialogResult.Yes)
-                    {
-                        lstGeneros.Items.RemoveAt(lstGeneros.SelectedIndices[0]);
-                    }
-                }
-            }
-            
+        {            
         }
     }
 }

@@ -90,7 +90,7 @@ namespace AcervoApp.view
                 return null;
             }
 
-            return usuario.Senha != senha ? null : usuario; 
+            return usuario.Senha != senha ? null : usuario;
         }
 
         private void lblCadastro_Click(object sender, EventArgs e)
@@ -125,7 +125,8 @@ namespace AcervoApp.view
                 if (usuario == null)
                 {
                     Utils.messageExclamation("Credenciais inválidas!", "Login");
-                } else
+                }
+                else
                 {
 
                     StaticKeys.usuarioEntity = usuario;
@@ -136,26 +137,13 @@ namespace AcervoApp.view
                         var favorito = _favoritoService.GetById<Favorito>(fav.Id, new List<String>() { "livro" });
 
                         var livro = _livroService.Get<Livro>().ToList().FirstOrDefault(x => x.Id == favorito.livro!.Id);
-                        
+
                         if (livro != null)
                         {
                             StaticKeys.favoritos.Add(livro);
                         }
 
                     }
-
-
-                    /*StaticKeys.usuarioLogado = new UsuarioModel()
-                    {
-                        Id = usuario.Id,
-                        Nome = usuario.Nome!,
-                        User = usuario.User!,
-                        Senha = usuario.Senha!,
-                        Bio = usuario.Bio!,
-                        Imagem = usuario.Imagem!,
-                        favoritos = 
-                    };*/
-
 
                     if (Principal.principal == null)
                     {
@@ -171,24 +159,8 @@ namespace AcervoApp.view
                     fecharLogin();
                 }
 
-                
-            }
-        }
 
-        private void btnEntrar2_Click(object sender, EventArgs e)
-        {
-
-            if (Principal.principal == null)
-            {
-                new Principal().Show();
             }
-            else
-            {
-                Principal.principal.Visible = true;
-                Principal.principal.carregarDados();
-            }
-            fecharLogin();
-
         }
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)

@@ -4,6 +4,8 @@ using AcervoApp.utils;
 using AcervoDomain.entities;
 using MaterialSkin.Controls;
 using ReaLTaiizor.Controls;
+using Service.Base;
+using Service.validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +25,8 @@ namespace AcervoApp.view
         List<ForeverButton> selectedStars = new List<ForeverButton>();
         Livro livro;
 
+        public readonly IBaseService<Avaliacao> _avaliacaoService;
+
         public FormAvaliar(Livro livro)
         {
             InitializeComponent();
@@ -33,11 +37,15 @@ namespace AcervoApp.view
             stars.Add(btnStar4);
             stars.Add(btnStar5);
 
+            _avaliacaoService = Principal.principal._avaliacaoService;
+
         }
 
         private void selecionarEstrelas(int numEstrelas)
         {
             int cont = 0;
+
+            selectedStars.Clear();
 
             foreach (var button in stars)
             {
@@ -129,12 +137,9 @@ namespace AcervoApp.view
 
             var avaliado = StaticKeys.livros.FirstOrDefault(x => x.Id == livro.Id);
 
-            if (avaliado != null)
-            {
-                if (avaliado.Avaliacoes == null) avaliado.Avaliacoes = new List<Avaliacao>();
+            Avaliacao Av = _avaliacaoService.Add<Avaliacao, Avaliacao, AvaliacaoValidator>(avaliacaoModel);
 
-                avaliado.Avaliacoes.Add(avaliacaoModel);
-            }
+            FormComentarios.formComentarios.livroModel.Avaliacoes.Add(Av);
 
             FormComentarios.formComentarios.atualizarPagina();
             this.Close();

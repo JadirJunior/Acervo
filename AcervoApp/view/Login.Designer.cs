@@ -33,7 +33,6 @@
             btnEntrar = new ReaLTaiizor.Controls.MaterialButton();
             lblAcervo = new ReaLTaiizor.Controls.BigLabel();
             lblCadastro = new Label();
-            btnEntrar2 = new ReaLTaiizor.Controls.MaterialButton();
             SuspendLayout();
             // 
             // txtUser
@@ -109,7 +108,7 @@
             btnEntrar.HighEmphasis = true;
             btnEntrar.Icon = null;
             btnEntrar.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            btnEntrar.Location = new Point(29, 412);
+            btnEntrar.Location = new Point(116, 412);
             btnEntrar.Margin = new Padding(5, 8, 5, 8);
             btnEntrar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             btnEntrar.Name = "btnEntrar";
@@ -149,34 +148,11 @@
             lblCadastro.MouseLeave += lblCadastro_MouseLeave;
             lblCadastro.MouseHover += lblCadastro_MouseHover;
             // 
-            // btnEntrar2
-            // 
-            btnEntrar2.AutoSize = false;
-            btnEntrar2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnEntrar2.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnEntrar2.Depth = 0;
-            btnEntrar2.HighEmphasis = true;
-            btnEntrar2.Icon = null;
-            btnEntrar2.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            btnEntrar2.Location = new Point(220, 412);
-            btnEntrar2.Margin = new Padding(5, 8, 5, 8);
-            btnEntrar2.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            btnEntrar2.Name = "btnEntrar2";
-            btnEntrar2.NoAccentTextColor = Color.Empty;
-            btnEntrar2.Size = new Size(181, 48);
-            btnEntrar2.TabIndex = 9;
-            btnEntrar2.Text = "Entrar sem login";
-            btnEntrar2.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnEntrar2.UseAccentColor = false;
-            btnEntrar2.UseVisualStyleBackColor = true;
-            btnEntrar2.Click += btnEntrar2_Click;
-            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(424, 563);
-            Controls.Add(btnEntrar2);
             Controls.Add(lblCadastro);
             Controls.Add(lblAcervo);
             Controls.Add(btnEntrar);
@@ -198,6 +174,5 @@
         private ReaLTaiizor.Controls.MaterialButton btnEntrar;
         private ReaLTaiizor.Controls.BigLabel lblAcervo;
         private Label lblCadastro;
-        private ReaLTaiizor.Controls.MaterialButton btnEntrar2;
     }
 }
