@@ -37,9 +37,9 @@
             lblCatalogo = new Label();
             panel = new FlowLayoutPanel();
             tabUser = new TabPage();
+            btnCancelar = new MaterialSkin.Controls.MaterialButton();
             btnNovoLivro = new MaterialSkin.Controls.MaterialButton();
             cmbMostraSenha = new ReaLTaiizor.Controls.MaterialCheckBox();
-            btnCancelar = new MaterialSkin.Controls.MaterialButton();
             btnSalvar = new MaterialSkin.Controls.MaterialButton();
             label3 = new Label();
             label2 = new Label();
@@ -149,9 +149,9 @@
             // 
             // tabUser
             // 
+            tabUser.Controls.Add(btnCancelar);
             tabUser.Controls.Add(btnNovoLivro);
             tabUser.Controls.Add(cmbMostraSenha);
-            tabUser.Controls.Add(btnCancelar);
             tabUser.Controls.Add(btnSalvar);
             tabUser.Controls.Add(label3);
             tabUser.Controls.Add(label2);
@@ -172,6 +172,27 @@
             tabUser.UseVisualStyleBackColor = true;
             tabUser.Enter += tabUser_Enter;
             // 
+            // btnCancelar
+            // 
+            btnCancelar.AutoSize = false;
+            btnCancelar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnCancelar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnCancelar.Depth = 0;
+            btnCancelar.HighEmphasis = true;
+            btnCancelar.Icon = null;
+            btnCancelar.Location = new Point(746, 435);
+            btnCancelar.Margin = new Padding(4, 6, 4, 6);
+            btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.NoAccentTextColor = Color.Empty;
+            btnCancelar.Size = new Size(198, 45);
+            btnCancelar.TabIndex = 19;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnCancelar.UseAccentColor = false;
+            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
             // btnNovoLivro
             // 
             btnNovoLivro.AutoSize = false;
@@ -180,7 +201,7 @@
             btnNovoLivro.Depth = 0;
             btnNovoLivro.HighEmphasis = true;
             btnNovoLivro.Icon = null;
-            btnNovoLivro.Location = new Point(562, 435);
+            btnNovoLivro.Location = new Point(540, 435);
             btnNovoLivro.Margin = new Padding(4, 6, 4, 6);
             btnNovoLivro.MouseState = MaterialSkin.MouseState.HOVER;
             btnNovoLivro.Name = "btnNovoLivro";
@@ -211,27 +232,6 @@
             cmbMostraSenha.UseAccentColor = false;
             cmbMostraSenha.UseVisualStyleBackColor = true;
             cmbMostraSenha.CheckedChanged += cmbMostraSenha_CheckedChanged;
-            // 
-            // btnCancelar
-            // 
-            btnCancelar.AutoSize = false;
-            btnCancelar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnCancelar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnCancelar.Depth = 0;
-            btnCancelar.HighEmphasis = true;
-            btnCancelar.Icon = null;
-            btnCancelar.Location = new Point(794, 435);
-            btnCancelar.Margin = new Padding(4, 6, 4, 6);
-            btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.NoAccentTextColor = Color.Empty;
-            btnCancelar.Size = new Size(198, 45);
-            btnCancelar.TabIndex = 16;
-            btnCancelar.Text = "CANCELAR";
-            btnCancelar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnCancelar.UseAccentColor = false;
-            btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnSalvar
             // 
@@ -499,7 +499,6 @@
         private ReaLTaiizor.Controls.MaterialTextBoxEdit txtNome;
         private Label label1;
         private ReaLTaiizor.Controls.MaterialTextBoxEdit txtSenha;
-        private MaterialSkin.Controls.MaterialButton btnCancelar;
         private MaterialSkin.Controls.MaterialButton btnSalvar;
         private Label label3;
         private Label label2;
@@ -509,5 +508,6 @@
         private MaterialSkin.Controls.MaterialButton btnNovoLivro;
         private OpenFileDialog opfUser;
         private TabPage tabLoggout;
+        private MaterialSkin.Controls.MaterialButton btnCancelar;
     }
 }

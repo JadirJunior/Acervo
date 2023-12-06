@@ -192,5 +192,6 @@ namespace AcervoApp.view
                 this.Hide();
             }
         }
+
     }
 }
