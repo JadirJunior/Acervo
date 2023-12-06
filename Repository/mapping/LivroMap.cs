@@ -31,7 +31,7 @@ namespace Repository.mapping
 
             builder.Property(prop => prop.Thumbnail)
                 .IsRequired()
-                .HasColumnType("blob");
+                .HasColumnType("longblob");
 
             builder.HasOne(prop => prop.Autor);
 

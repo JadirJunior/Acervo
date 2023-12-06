@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormComentarios));
             btnAvaliar = new MaterialSkin.Controls.MaterialButton();
             panelComentarios = new FlowLayoutPanel();
             lblTitulo = new Label();
+            pcbThumbnail = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pcbThumbnail).BeginInit();
             SuspendLayout();
             // 
             // btnAvaliar
@@ -73,16 +76,28 @@
             lblTitulo.TabIndex = 2;
             lblTitulo.Text = "Título do livro";
             // 
+            // pcbThumbnail
+            // 
+            pcbThumbnail.Location = new Point(475, 67);
+            pcbThumbnail.Name = "pcbThumbnail";
+            pcbThumbnail.Size = new Size(389, 65);
+            pcbThumbnail.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbThumbnail.TabIndex = 3;
+            pcbThumbnail.TabStop = false;
+            // 
             // FormComentarios
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(870, 536);
+            Controls.Add(pcbThumbnail);
             Controls.Add(lblTitulo);
             Controls.Add(panelComentarios);
             Controls.Add(btnAvaliar);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormComentarios";
             Text = "Comentários";
+            ((System.ComponentModel.ISupportInitialize)pcbThumbnail).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -92,5 +107,6 @@
         private MaterialSkin.Controls.MaterialButton btnAvaliar;
         private FlowLayoutPanel panelComentarios;
         private Label lblTitulo;
+        private PictureBox pcbThumbnail;
     }
 }

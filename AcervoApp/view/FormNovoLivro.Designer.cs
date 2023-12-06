@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormNovoLivro));
             txtTitulo = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
             txtSinopse = new ReaLTaiizor.Controls.MaterialRichTextBox();
             label1 = new Label();
@@ -253,6 +254,7 @@
             Controls.Add(label1);
             Controls.Add(txtSinopse);
             Controls.Add(txtTitulo);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormNovoLivro";
             Text = "Novo Livro";
             ((System.ComponentModel.ISupportInitialize)pcbImagem).EndInit();

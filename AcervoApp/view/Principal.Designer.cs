@@ -465,6 +465,7 @@
             Controls.Add(pages);
             Controls.Add(materialDrawer1);
             DrawerTabControl = pages;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
             Margin = new Padding(3, 4, 3, 4);
             Name = "Principal";

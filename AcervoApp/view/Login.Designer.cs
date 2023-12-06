@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             txtUser = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
             txtSenha = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
             btnEntrar = new ReaLTaiizor.Controls.MaterialButton();
@@ -158,6 +159,7 @@
             Controls.Add(btnEntrar);
             Controls.Add(txtSenha);
             Controls.Add(txtUser);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "Login";
             Padding = new Padding(3, 85, 3, 4);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAvaliar));
             txtComentario = new ReaLTaiizor.Controls.MaterialRichTextBox();
             label1 = new Label();
             btnSalvar = new ReaLTaiizor.Controls.MaterialButton();
@@ -197,6 +198,7 @@
             Controls.Add(btnSalvar);
             Controls.Add(label1);
             Controls.Add(txtComentario);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAvaliar";
             Text = "Avaliar";
             ResumeLayout(false);

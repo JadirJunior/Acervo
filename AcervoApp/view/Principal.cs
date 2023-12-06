@@ -41,7 +41,7 @@ namespace AcervoApp.view
         {
             panel.Controls.Clear();
 
-            foreach ( var livro in _livroService.Get<Livro>(new List<String> { "Generos", "Autor", "Avaliacoes" }).ToList())
+            foreach (var livro in _livroService.Get<Livro>(new List<String> { "Generos", "Autor", "Avaliacoes" }).ToList())
             {
                 panel.Controls.Add(new LivroItem(livro));
             }
@@ -53,7 +53,7 @@ namespace AcervoApp.view
         {
             panelFav.Controls.Clear();
 
-            foreach (var favorito in _favoritoService.Get<Favorito>(new List<String> { "livro", "usuario"}).ToList().Where(x => x.usuario!.Id == StaticKeys.usuarioEntity!.Id))
+            foreach (var favorito in _favoritoService.Get<Favorito>(new List<String> { "livro", "usuario" }).ToList().Where(x => x.usuario!.Id == StaticKeys.usuarioEntity!.Id))
             {
                 var livro = _livroService.GetById<Livro>(favorito.livro!.Id, new List<String> { "Generos", "Autor", "Avaliacoes" });
                 panelFav.Controls.Add(new LivroItem(livro));
@@ -71,7 +71,8 @@ namespace AcervoApp.view
             if (StaticKeys.usuarioEntity.Imagem != null)
             {
                 imagemUser.Image = Conversoes.BytesToImage(StaticKeys.usuarioEntity.Imagem);
-            } else
+            }
+            else
             {
                 imagemUser.Image = Resources.UserIcon;
             }
@@ -80,13 +81,6 @@ namespace AcervoApp.view
         public void carregarDados()
         {
             pages.SelectedIndex = 0;
-
-            if (StaticKeys.usuarioEntity == null)
-            {
-                pages.Controls.Remove(tabUser);
-                pages.Controls.Remove(tabFavoritos);
-                pages.Controls.Remove(tabLoggout);
-            }
             principal = this;
             logout = false;
             carregarObras();
@@ -95,12 +89,12 @@ namespace AcervoApp.view
         public Principal()
         {
             InitializeComponent();
-            _generoLivroService = ConfigureDI.ServicesProvider!.GetService<IBaseService<GeneroLivro>>();
-            _livroService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Livro>>();
-            _usuarioService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Usuario>>();
-            _favoritoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Favorito>>();
-            _generoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Genero>>();
-            _avaliacaoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Avaliacao>>();
+            _generoLivroService = ConfigureDI.ServicesProvider!.GetService<IBaseService<GeneroLivro>>()!;
+            _livroService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Livro>>()!;
+            _usuarioService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Usuario>>()!;
+            _favoritoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Favorito>>()!;
+            _generoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Genero>>()!;
+            _avaliacaoService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Avaliacao>>()!;
             carregarDados();
         }
 

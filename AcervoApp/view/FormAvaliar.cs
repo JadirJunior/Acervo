@@ -37,7 +37,7 @@ namespace AcervoApp.view
             stars.Add(btnStar4);
             stars.Add(btnStar5);
 
-            _avaliacaoService = Principal.principal._avaliacaoService;
+            _avaliacaoService = Principal.principal!._avaliacaoService;
 
         }
 

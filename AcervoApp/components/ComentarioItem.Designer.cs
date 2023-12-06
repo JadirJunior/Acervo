@@ -60,6 +60,7 @@
             txtComentario.BackColor = Color.FromArgb(255, 255, 255);
             txtComentario.BorderStyle = BorderStyle.None;
             txtComentario.Depth = 0;
+            txtComentario.Enabled = false;
             txtComentario.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtComentario.ForeColor = Color.FromArgb(222, 0, 0, 0);
             txtComentario.Hint = "";
@@ -82,7 +83,6 @@
             // 
             // star1
             // 
-            star1.BorderStyle = BorderStyle.FixedSingle;
             star1.Image = Properties.Resources.emptyStar;
             star1.Location = new Point(154, 6);
             star1.Name = "star1";
@@ -93,7 +93,6 @@
             // 
             // star2
             // 
-            star2.BorderStyle = BorderStyle.FixedSingle;
             star2.Image = Properties.Resources.emptyStar;
             star2.Location = new Point(194, 6);
             star2.Name = "star2";
@@ -104,7 +103,6 @@
             // 
             // star3
             // 
-            star3.BorderStyle = BorderStyle.FixedSingle;
             star3.Image = Properties.Resources.emptyStar;
             star3.Location = new Point(234, 6);
             star3.Name = "star3";
@@ -115,7 +113,6 @@
             // 
             // star4
             // 
-            star4.BorderStyle = BorderStyle.FixedSingle;
             star4.Image = Properties.Resources.emptyStar;
             star4.Location = new Point(274, 6);
             star4.Name = "star4";
@@ -126,7 +123,6 @@
             // 
             // star5
             // 
-            star5.BorderStyle = BorderStyle.FixedSingle;
             star5.Image = Properties.Resources.emptyStar;
             star5.Location = new Point(314, 6);
             star5.Name = "star5";

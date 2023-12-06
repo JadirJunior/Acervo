@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CadastroUsuario));
             txtNome = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
             txtUser = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
             txtSenha = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
@@ -284,6 +285,7 @@
             Controls.Add(txtSenha);
             Controls.Add(txtUser);
             Controls.Add(txtNome);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "CadastroUsuario";
             Text = "CadastroUsuario";
             ((System.ComponentModel.ISupportInitialize)pcbImagem).EndInit();

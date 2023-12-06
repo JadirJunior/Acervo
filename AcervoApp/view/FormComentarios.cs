@@ -41,6 +41,12 @@ namespace AcervoApp.view
                 }
             }
 
+
+            if (livroModel.Thumbnail != null)
+            {
+                pcbThumbnail.Image = Conversoes.BytesToImage(livroModel.Thumbnail!);
+            }
+
         }
 
 
@@ -77,6 +83,10 @@ namespace AcervoApp.view
 
             lblTitulo.Text = livro.Titulo;
 
+            if (livroModel.Thumbnail != null)
+            {
+                pcbThumbnail.Image = Conversoes.BytesToImage(livroModel.Thumbnail!);
+            }
 
         }
 
@@ -84,5 +94,6 @@ namespace AcervoApp.view
         {
             new FormAvaliar(livroModel).ShowDialog();
         }
+
     }
 }

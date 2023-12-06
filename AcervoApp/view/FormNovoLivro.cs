@@ -55,7 +55,7 @@ namespace AcervoApp.view
             _generoLivroService = Principal.principal._generoLivroService;
 
             inicializarGeneros();
-            
+
 
             edicao = false;
         }
@@ -139,105 +139,116 @@ namespace AcervoApp.view
         private void btnSalvar_Click(object sender, EventArgs e)
         {
 
-            Livro livroAtualizado = new Livro()
-            { 
-               Autor = StaticKeys.usuarioEntity,
-               Avaliacoes = new List<Avaliacao>(),
-               Documento = novaObra,
-               Titulo = txtTitulo.Text,
-               Sinopse = txtSinopse.Text,
-               Thumbnail = thumbnail
-            };
-
-            foreach (int a in lstGeneros.SelectedIndices)
+            if (lstGeneros.SelectedIndices.Count == 0)
             {
-                var gen = Generos.FirstOrDefault(x => x.tipo == lstGeneros.Items[a].Text);
-                if (gen != null)
-                {
-                    selecionados2.Add(new GeneroLivro()
-                    {
-                        Genero = gen,
-                        Livro = livroAtualizado
-                    });
-
-                }
+                Utils.messageExclamation("Selecione pelo menos um gênero!", "Novo Livro");
             }
-
-            livroAtualizado.Generos = selecionados2;
-
-            if (!edicao)
+            else
             {
-                var livros = _livroService.Get<Livro>().ToList();
-                _livroService.Add<Livro, Livro, LivroValidator>(livroAtualizado);
-
-                foreach (var g in livroAtualizado.Generos)
+                Livro livroAtualizado = new Livro()
                 {
-                    _generoLivroService.Add<GeneroLivro, GeneroLivro, GeneroLivroValidator>(g);
+                    Autor = StaticKeys.usuarioEntity,
+                    Avaliacoes = new List<Avaliacao>(),
+                    Documento = novaObra,
+                    Titulo = txtTitulo.Text,
+                    Sinopse = txtSinopse.Text,
+                    Thumbnail = thumbnail
+                };
+
+                foreach (int a in lstGeneros.SelectedIndices)
+                {
+                    var gen = Generos.FirstOrDefault(x => x.tipo == lstGeneros.Items[a].Text);
+                    if (gen != null)
+                    {
+                        selecionados2.Add(new GeneroLivro()
+                        {
+                            Genero = gen,
+                            Livro = livroAtualizado
+                        });
+
+                    }
                 }
 
-                Utils.messageBoxOk("Livro inserido com sucesso!", "Cadastro de Livro");
+                livroAtualizado.Generos = selecionados2;
 
-                this.Close();
-            }
-            else {
-
-
-                var generosLivro = _generoLivroService.Get<GeneroLivroModel>(new List<String>() { "Genero", "Livro" })
-                        .Where(x => x.Livro!.Id == livro.Id).ToList();
-
-                livroAtualizado.Id = livro.Id;
-                
-                livroAtualizado.Generos.Clear();
-                var livroNovo = _livroService.Update<Livro, Livro, LivroValidator>(livroAtualizado);
-
-                foreach (ListViewItem item in lstGeneros.Items)
+                if (!edicao)
                 {
+                    var livros = _livroService.Get<Livro>().ToList();
+                    _livroService.Add<Livro, Livro, LivroValidator>(livroAtualizado);
 
-                    //Salvando os generos novos e editado
-                    var ret = generosLivro.Find(x => x.tipoGenero == item.Text);
-
-                    if (ret != null)
+                    foreach (var g in livroAtualizado.Generos)
                     {
-                        _generoLivroService.Delete(ret.Id);
-
-                        if (item.Selected)
-                        {
-                            _generoLivroService.Add<GeneroLivro, GeneroLivro, GeneroLivroValidator>(
-                                new GeneroLivro()
-                                {
-                                    Genero = _generoService.GetById<Genero>(ret.generoId),
-                                    Livro = livroNovo
-                                });
-                        }
-                    } else
-                    {
-                        if (item.Selected)
-                        {
-                            _generoLivroService.Add<GeneroLivro, GeneroLivro, GeneroLivroValidator>(
-                                new GeneroLivro()
-                                {
-                                    Genero = _generoService.Get<Genero>().Where(x => x.tipo == item.Text).FirstOrDefault(),
-                                    Livro = livroNovo
-                                });
-                        }
+                        _generoLivroService.Add<GeneroLivro, GeneroLivro, GeneroLivroValidator>(g);
                     }
 
+                    Utils.messageBoxOk("Livro inserido com sucesso!", "Cadastro de Livro");
+
+                    this.Close();
                 }
-
-                Utils.messageBoxOk("Livro atualizado com sucesso!", "Edição");
-
-                if (Principal.principal != null)
+                else
                 {
-                    Principal.principal.carregarObras();
-                }
 
-                this.Close();
+
+                    var generosLivro = _generoLivroService.Get<GeneroLivroModel>(new List<String>() { "Genero", "Livro" })
+                            .Where(x => x.Livro!.Id == livro.Id).ToList();
+
+                    livroAtualizado.Id = livro.Id;
+
+                    livroAtualizado.Generos.Clear();
+                    var livroNovo = _livroService.Update<Livro, Livro, LivroValidator>(livroAtualizado);
+
+                    foreach (ListViewItem item in lstGeneros.Items)
+                    {
+
+                        //Salvando os generos novos e editado
+                        var ret = generosLivro.Find(x => x.tipoGenero == item.Text);
+
+                        if (ret != null)
+                        {
+                            _generoLivroService.Delete(ret.Id);
+
+                            if (item.Selected)
+                            {
+                                _generoLivroService.Add<GeneroLivro, GeneroLivro, GeneroLivroValidator>(
+                                    new GeneroLivro()
+                                    {
+                                        Genero = _generoService.GetById<Genero>(ret.generoId),
+                                        Livro = livroNovo
+                                    });
+                            }
+                        }
+                        else
+                        {
+                            if (item.Selected)
+                            {
+                                _generoLivroService.Add<GeneroLivro, GeneroLivro, GeneroLivroValidator>(
+                                    new GeneroLivro()
+                                    {
+                                        Genero = _generoService.Get<Genero>().Where(x => x.tipo == item.Text).FirstOrDefault(),
+                                        Livro = livroNovo
+                                    });
+                            }
+                        }
+
+                    }
+
+                    Utils.messageBoxOk("Livro atualizado com sucesso!", "Edição");
+
+                    if (Principal.principal != null)
+                    {
+                        Principal.principal.carregarObras();
+                    }
+
+                    this.Close();
+                }
             }
+
+
 
         }
 
         private void lstGeneros_MouseDoubleClick(object sender, MouseEventArgs e)
-        {            
+        {
         }
     }
 }

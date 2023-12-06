@@ -41,52 +41,47 @@ namespace AcervoApp.components
             _livroService = Principal.principal._livroService;
             _avaliacaoService = Principal.principal._avaliacaoService;
 
-            if (StaticKeys.usuarioEntity == null)
+
+
+            var ret = StaticKeys.favoritos.Find(x => x.Id == livro.Id);
+
+            if (ret != null)
             {
-                btnComentarios.Enabled = false;
-                btnComentarios.Visible = false;
-                pcbFavorito.Enabled = false;
-                pcbFavorito.Visible = false;
+                vazio = false;
+                pcbFavorito.Image = Resources.CoracaoCheio;
+            }
+
+            if (livroModel.Autor?.Id != StaticKeys.usuarioEntity?.Id)
+            {
                 pcbApagar.Enabled = false;
                 pcbApagar.Visible = false;
                 pcbEditar.Enabled = false;
                 pcbEditar.Visible = false;
-
-            } else
-            {
-                var ret = StaticKeys.favoritos.Find(x => x.Id == livro.Id);
-
-                if (ret != null)
-                {
-                    vazio = false;
-                    pcbFavorito.Image = Resources.CoracaoCheio;
-                }
-
-                if (livroModel.Autor?.Id != StaticKeys.usuarioEntity?.Id)
-                {
-                    pcbApagar.Enabled = false;
-                    pcbApagar.Visible = false;
-                    pcbEditar.Enabled = false;
-                    pcbEditar.Visible = false;
-                }
             }
 
             lblTitulo.Text = livro.Titulo;
             txtSinopse.Text = livro.Sinopse;
+            lblUser.Text = "Autor: " + livroModel.Autor!.User;
 
             if (livro.Autor != null && livro.Autor.Imagem != null)
             {
                 imagemUser.Image = Conversoes.BytesToImage(livro.Autor.Imagem);
             }
+            else
+            {
+                imagemUser.Image = Resources.UserIcon;
+            }
 
             foreach (GeneroLivro model in livro.Generos)
             {
-                
+
                 listGeneros.Items.Add(_generoLivroService.GetById<GeneroLivro>(model.Id, new List<String>() { "Genero" }).Genero!.tipo);
 
             }
 
         }
+
+
 
         private void LivroItem_Load(object sender, EventArgs e)
         {
@@ -199,10 +194,10 @@ namespace AcervoApp.components
                         Principal.principal!.carregarFavoritos();
                         Principal.principal!.carregarObras();
                     }
-                    
 
-                } 
-                
+
+                }
+
                 catch (Exception ex)
                 {
                     Utils.messageExclamation("Ocorreu um erro, tente novamente", "Erro");
@@ -227,6 +222,14 @@ namespace AcervoApp.components
         private void btnComentarios_Click(object sender, EventArgs e)
         {
             new FormComentarios(livroModel).ShowDialog();
+        }
+
+        private void imagemUser_DoubleClick(object sender, EventArgs e)
+        {
+            if (livroModel.Autor != null)
+            {
+                new FormDadosUsuario(livroModel.Autor).ShowDialog();
+            }
         }
     }
 }

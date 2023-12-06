@@ -13,7 +13,7 @@ namespace AcervoApp.utils
 
         public static Usuario? usuarioEntity = null;
 
-        public static UsuarioModel? usuarioLogado = null;
+        
 
         public static List<Livro> livros = new List<Livro>();
 
@@ -22,7 +22,6 @@ namespace AcervoApp.utils
         public static void reset()
         {
             usuarioEntity = null;
-            usuarioLogado = null;
             livros = new List<Livro>();
             favoritos = new List<Livro>();
         }

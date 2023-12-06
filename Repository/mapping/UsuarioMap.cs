@@ -34,7 +34,7 @@ namespace Repository.mapping
                 .HasColumnType("varchar(255)");
 
             builder.Property(prop => prop.Imagem)
-                .HasColumnType("blob");
+                .HasColumnType("longblob");
 
             builder.HasMany(prop => prop.Favoritos)
                 .WithOne(prop => prop.usuario);

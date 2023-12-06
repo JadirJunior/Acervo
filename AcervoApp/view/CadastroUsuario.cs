@@ -24,12 +24,20 @@ namespace AcervoApp.view
 
         byte[] imageBytes = null;
 
-        private readonly IBaseService<Usuario> _usuarioService; 
+        private readonly IBaseService<Usuario> _usuarioService;
 
         public CadastroUsuario()
         {
             InitializeComponent();
-            _usuarioService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Usuario>>();
+            if (Principal.principal == null)
+            {
+                _usuarioService = ConfigureDI.ServicesProvider!.GetService<IBaseService<Usuario>>()!;
+            }
+            else
+            {
+                _usuarioService = Principal.principal!._usuarioService;
+
+            }
         }
 
         private bool usuarioExiste(String user)
@@ -62,25 +70,27 @@ namespace AcervoApp.view
                 String.IsNullOrEmpty(txtNome.Text) ||
                 String.IsNullOrEmpty(txtUser.Text) ||
                 String.IsNullOrEmpty(txtSenha.Text) ||
-                String.IsNullOrEmpty(txtBio.Text) )
+                String.IsNullOrEmpty(txtBio.Text))
             {
                 Utils.messageExclamation("Preencha todos os campos!", "Cadastro");
-            } else
+            }
+            else
             {
                 if (txtSenha.Text != txtSenhaConf.Text)
                 {
                     Utils.messageExclamation("Senhas não coincidentes!", "Cadastro");
-                } 
-                
+                }
+
                 else
-                
+
                 {
-                    
+
                     if (usuarioExiste(txtUser.Text))
                     {
                         Utils.messageExclamation("Usuário já cadastrado!", "Cadastro");
 
-                    } else
+                    }
+                    else
                     {
                         var usuario = new Usuario()
                         {
@@ -97,17 +107,6 @@ namespace AcervoApp.view
 
                         Usuario novoUsuario = _usuarioService.Add<Usuario, Usuario, UsuarioValidator>(usuario);
 
-                        StaticKeys.usuarioLogado = new UsuarioModel()
-                        {
-                            Id = novoUsuario.Id,
-                            Nome = txtNome.Text,
-                            User = txtUser.Text,
-                            Senha = txtSenha.Text,
-                            Bio = txtBio.Text,
-                            Imagem = imageBytes
-
-                        };
-
                         StaticKeys.usuarioEntity = novoUsuario;
 
                         Utils.messageBoxOk("Usuário Cadastrado com sucesso!", "Cadastro");
@@ -116,14 +115,14 @@ namespace AcervoApp.view
                         Login.fecharLogin(false);
                     }
 
-                    
+
 
                 }
 
 
             }
 
-            
+
 
 
         }

@@ -108,7 +108,9 @@ namespace AcervoApp.infra
             /*Services.AddTransient<Login, Login>();
             Services.AddTransient<CadastroUsuario, CadastroUsuario>();
             Services.AddTransient<FormNovoLivro, FormNovoLivro>();
-            Services.AddTransient<FormAvaliar, FormAvaliar>();*/
+            Services.AddTransient<FormAvaliar, FormAvaliar>();
+            Services.AddTransient<FormComentarios, FormComentarios>();
+            Services.AddTransient<FormDadosLivro, FormDadosLivro>();*/
 
             // Mapping
 
