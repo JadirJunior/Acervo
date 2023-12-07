@@ -63,6 +63,12 @@ namespace AcervoApp.infra
                     tipo = "Romance",
                     descricao = "Histórias para fazer com que se emocione em meio à paixão!"
                 });
+
+                _generoService.Add<Genero, Genero, GeneroValidator>(new Genero()
+                {
+                    tipo = "Científico",
+                    descricao = "Pesquisas, conceitos e amostragens científicas"
+                });
             }
         }
 
@@ -71,9 +77,8 @@ namespace AcervoApp.infra
             Services = new ServiceCollection();
             Services.AddDbContext<MySqlContext>(options =>
             {
-                //var path = Path.Combine(AppContext.BaseDirectory, );
-
-                var strCon = File.ReadAllText("C:\\Users\\jadir\\source\\repos\\Acervo\\AcervoApp\\config\\DatabaseSettings.txt");
+                //var strCon = File.ReadAllText("C:\\Users\\jadir\\source\\repos\\Acervo\\AcervoApp\\config\\DatabaseSettings.txt");
+                var strCon = File.ReadAllText("..\\..\\..\\config\\DatabaseSettings.txt");
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
                 options.EnableSensitiveDataLogging();
 

@@ -122,7 +122,7 @@ namespace AcervoApp.view
         private void btnSelecionarImagem_Click(object sender, EventArgs e)
         {
             opfSelecionar.Title = "Selecione uma imagem";
-            opfSelecionar.Filter = "Imagens (*.ico;*.jpg;*.bmp;*.gif;*.png)|*.jpg;*.bmp;*.gif;*.png;*.ico";
+            opfSelecionar.Filter = "Imagens (*.ico;*.jpg;*.bmp;*.gif;*.png;*.jpeg)|*.jpg;*.bmp;*.gif;*.png;*.ico;*.jpeg";
 
             if (opfSelecionar.ShowDialog() == DialogResult.OK)
             {

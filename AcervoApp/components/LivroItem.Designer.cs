@@ -49,7 +49,7 @@
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Century Gothic", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTitulo.Location = new Point(144, 13);
+            lblTitulo.Location = new Point(3, 4);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(108, 44);
             lblTitulo.TabIndex = 2;
@@ -131,7 +131,7 @@
             // btnLer
             // 
             btnLer.BackColor = Color.Transparent;
-            btnLer.BaseColor = Color.Silver;
+            btnLer.BaseColor = SystemColors.Highlight;
             btnLer.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnLer.Location = new Point(84, 230);
             btnLer.Name = "btnLer";
